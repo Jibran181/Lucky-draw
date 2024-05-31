@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Web3 from "web3";
 import { ethers } from "ethers";
-import { useState } from "react";
 import icon from "../assets/metmask-icon.png";
 import { Web3Context } from "./web3context";
 
