@@ -1,0 +1,34 @@
+.create-lottery-button {
+    background-color: #34d399;
+    /* Green background */
+    color: white;
+    /* White text */
+    padding: 10px 20px;
+    /* Padding */
+    font-size: 16px;
+    /* Font size */
+    font-weight: bold;
+    /* Bold text */
+    border: none;
+    /* No border */
+    border-radius: 8px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Smooth transition for background color and transform */
+}
+
+.create-lottery-button:hover {
+    background-color: #059669;
+    /* Darker green on hover */
+    transform: translateY(-2px);
+    /* Slight lift on hover */
+}
+
+.create-lottery-button:active {
+    background-color: #047857;
+    /* Even darker green on click */
+    transform: translateY(0);
+    /* Reset lift on click */
+}
