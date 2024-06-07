@@ -13,7 +13,7 @@ function App() {
 
         <Main />
 
-        <Roadmap />
+        {/* <Roadmap /> */}
       </Web3Provider>
     </div>
   );
