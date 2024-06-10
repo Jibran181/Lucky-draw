@@ -4,7 +4,8 @@ import icon from "../assets/metmask-icon.png";
 import { Web3Context } from "./web3context";
 
 export default function Navbar() {
-  const { isConnectedd, connectedAddress, connectToMetaMask } = useContext(Web3Context);
+  const { isConnectedd, connectedAddress, connectToMetaMask } =
+    useContext(Web3Context);
 
   const handleConnect = async () => {
     if (isConnectedd === false) {
@@ -13,8 +14,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full items-center px-4 py-4 md:p-4 h-15 bg-[#080d1854] flex justify-between">
-      <div className="text-2xl font-bold text-white shadow-lg shadow-black cursor-pointer">
+    <nav className="w-full items-center px-4 py-4 md:p-4 h-15 bg-[#efb23a] flex justify-between fixed z-20 top-0 start-0">
+      <div className="text-2xl font-bold text-white  cursor-pointer">
         Eth Lucky Draw{" "}
       </div>
       <div className="flex flex-row gap-3">
@@ -26,7 +27,7 @@ export default function Navbar() {
         <button
           onClick={handleConnect}
           type="button"
-          className="hidden md:block text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg text-sm p-3 text-center text-[15px] font-bold me-2 mb-2 px-7"
+          className="hidden md:block text-white bg-[#233545]  hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg text-sm p-3 text-center text-[15px] font-bold me-2 mb-2 px-7"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,8 +45,8 @@ export default function Navbar() {
           </svg>
           {connectedAddress
             ? `${connectedAddress.slice(0, 4)}...${connectedAddress.slice(
-              connectedAddress.length - 4
-            )}`
+                connectedAddress.length - 4
+              )}`
             : "Connect"}
         </button>
       </div>
