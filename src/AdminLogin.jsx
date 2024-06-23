@@ -5,38 +5,38 @@ import { useNavigate } from "react-router-dom";
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    e.preventDefault();
-    console.log("Navigating to admin dashboard");
-    navigate("/admin/dashboard");
-    console.log("Navigation function called");
-    // navigate('/admin/dashboard');
-    // e.preventDefault();
-    // navigate('/admin/dashboard');
-    // return
-    // // Replace with your backend URL
-    // const response = await fetch('https://your-backend-url.com/api/login', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ username, password }),
-    // });
+  //   const handleLogin = (e) => {
+  //     e.preventDefault();
+  //     e.preventDefault();
+  //     console.log("Navigating to admin dashboard");
+  //     navigate("/admin/dashboard");
+  //     console.log("Navigation function called");
+  // navigate('/admin/dashboard');
+  // e.preventDefault();
+  // navigate('/admin/dashboard');
+  // return
+  // // Replace with your backend URL
+  // const response = await fetch('https://your-backend-url.com/api/login', {
+  //     method: 'POST',
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ username, password }),
+  // });
 
-    // const data = await response.json();
+  // const data = await response.json();
 
-    // if (data.success) {
-    //     localStorage.setItem('authToken', data.token);
-    //     navigate('/admin/dashboard');
-    // } else {
-    //     alert('Invalid credentials');
-    //     navigate('/admin/dashboard');
+  // if (data.success) {
+  //     localStorage.setItem('authToken', data.token);
+  //     navigate('/admin/dashboard');
+  // } else {
+  //     alert('Invalid credentials');
+  //     navigate('/admin/dashboard');
 
-    // }
-  };
+  // }
+  //   };
 
   return (
     <>
