@@ -20,8 +20,9 @@ function App() {
       // className="bg-cover bg-center min-h-screen h-screen bg-[url('./assets/full-bg.jpg')] font-bod"
       >
         <Web3Provider>
+          {" "}
+          <Navbar />
           <Router>
-            <Navbar />
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/admin/login" element={<AdminLogin />} />
