@@ -193,7 +193,7 @@ export default function Main() {
               >
                 Cancel
               </button>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
+              <button className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]">
                 Confirm
               </button>
             </div>
@@ -214,7 +214,7 @@ export default function Main() {
           >
             <a href="#">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
-                Lorem ipsum dolor sit amet{" "}
+                Stopwatch{" "}
               </h5>
             </a>
             <p class="mb-3 font-normal text-[#233545] ">
@@ -250,7 +250,7 @@ export default function Main() {
           >
             <a href="#">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
-                Lorem ipsum dolor sit amet{" "}
+                Buy ticket{" "}
               </h5>
             </a>
             <p class="mb-3 font-normal text-[#233545] ">
@@ -286,7 +286,7 @@ export default function Main() {
           >
             <a href="#">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
-                Lorem ipsum dolor sit amet{" "}
+                Claim here{" "}
               </h5>
             </a>
             <p class="mb-3 font-normal text-[#233545] ">
@@ -318,21 +318,33 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-12 p-2 md:p-6 my-4 text-white text-center ">
-        {/* <div className="p-2 md:p-8 h-25 grid col-span-4 place-items-center">
+      <div className="flex flex-col justify-center items-center mt-12">
+        <div
+          data-aos="fade-up"
+          class="centered-div w-1/2 !text-[#233545] !text-center"
+        >
+          Clock is ticking!{" "}
+        </div>
+        <div data-aos="fade-up">
+          {" "}
+          <Timer />
+        </div>
+      </div>
+      {/* <div className="grid grid-cols-12 p-2 md:p-6 my-4 text-white text-center "> */}
+      {/* <div className="p-2 md:p-8 h-25 grid col-span-4 place-items-center">
           <img
             src={BgImage}
             className=" motion-safe:animate-pulse w-[250px] h-[300px] md:h-auto md:w-[300px]"
           />
         </div> */}
-        {/* <div className="px-2 md:p-10  bg-slate-900 border-sky-500 border-2 shadow-black shadow-xl rounded-xl"> 
+      {/* <div className="px-2 md:p-10  bg-slate-900 border-sky-500 border-2 shadow-black shadow-xl rounded-xl"> 
                 <img src={crypto} ></img>
                 <p className=" animate-pulse text-[20px] md:text-2xl outline-double bg-gray-800 my-10">Ticket Price : 0.01 ETH </p>
                 <p className=" text-shadow text-shadow-black text-shadow-x-3 shadow-black text-[14px] md:text-2xl font-semibold my-8">
                 Participants will automatically receive a lucky draw ticket after completing the transaction. Each lucky draw ticket entitles them to one try at the Lucky Draw.
                     </p>
                     </div> */}
-      </div>
+      {/* </div> */}
 
       <div className="grid p-2 md:p-6 my-4 text-white text-center">
         {/* <div className="px-2 md:p-10  bg-slate-900 border-sky-500 border-2 shadow-black shadow-xl rounded-xl"> 
@@ -342,7 +354,8 @@ export default function Main() {
                 Participants will automatically receive a lucky draw ticket after completing the transaction. Each lucky draw ticket entitles them to one try at the Lucky Draw.
                     </p>
         </div> */}
-        <div>{/* <Timer /> */}</div>
+        {/* <div>
+        </div> */}
 
         {/* <div className="my-7">
                 <ul className="flex justify-center items-center text-2xl md:text-3xl">

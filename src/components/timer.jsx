@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { CountdownCircleTimer } from "react-countdown-circle-timer"; import Modal from 'react-modal';
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import Modal from "react-modal";
 import ReactDOM from "react-dom";
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
@@ -24,26 +25,28 @@ export default function Timer() {
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();
-    setDays(Math.floor(time / (1000 * 60 * 60 * 24)))
-    setHours(Math.floor(time / (1000 * 60 * 60) % 24))
-    setMins(Math.floor(time / (1000 * 60) % 60))
-    setSecs(Math.floor(time / (1000) % 60))
-  }
+    setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
+    setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
+    setMins(Math.floor((time / (1000 * 60)) % 60));
+    setSecs(Math.floor((time / 1000) % 60));
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => getTime(), 1000)
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(() => getTime(), 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="flex flex-row gap-9">
+    <div className="flex gap-8 flex-wrap">
       <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold my-4">Lucky Draw No# 1234 will ends in .. </h1>
+        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
+          Lucky Draw No# 1234 will ends in ..{" "}
+        </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer
             isPlaying
             duration={3440}
-            colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
             colorsTime={[10, 6, 3, 0]}
             onComplete={() => ({ delay: 1 })}
           >
@@ -51,40 +54,47 @@ export default function Timer() {
           </CountdownCircleTimer>
         </div>
       </div>
-
       <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold my-4">Lucky Draw No# 2424 will ends in .. </h1>
+        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
+          Lucky Draw No# 2424 will ends in ..{" "}
+        </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer
             isPlaying
             duration={400}
-            colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
             colorsTime={[10, 6, 3, 0]}
             onComplete={() => ({ delay: 1 })}
           >
             {renderTime}
           </CountdownCircleTimer>
         </div>
-      </div> <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold my-4">Lucky Draw No# 2424 will ends in .. </h1>
+      </div>{" "}
+      <div className="flex flex-col gap-9 justify-center items-center">
+        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
+          Lucky Draw No# 2424 will ends in ..{" "}
+        </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer
             isPlaying
             duration={40000}
-            colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
             colorsTime={[10, 6, 3, 0]}
             onComplete={() => ({ delay: 1 })}
           >
             {renderTime}
           </CountdownCircleTimer>
         </div>
-      </div> <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-bold my-4">Lucky Draw No# 2424 will ends in .. </h1>
+      </div>{" "}
+      <div className="flex flex-col gap-9 justify-center items-center">
+        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
+          Lucky Draw No# 2424 will ends in ..{" "}
+        </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer
             isPlaying
             duration={40000}
-            colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
             colorsTime={[10, 6, 3, 0]}
             onComplete={() => ({ delay: 1 })}
           >
@@ -98,6 +108,6 @@ export default function Timer() {
         <div className="px-[4px] md:px-[24px]  border-2">{mins}<br></br>Minutes</div>
         <div className="px-[4px] md:px-[24px]  border-2 rounded-r-lg">{secs}<br></br>Seconds</div>
         </div> */}
-    </div >
+    </div>
   );
 }
