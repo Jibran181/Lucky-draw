@@ -111,7 +111,7 @@ export default function AdminDashboard() {
                     className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
                     onClick={() => openModal(lottery)}
                   >
-                    Select Winner
+                    View Winner
                   </button>
                 </td>
               </tr>
@@ -123,18 +123,18 @@ export default function AdminDashboard() {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Select Winner"
-        className="bg-white p-8 rounded-lg shadow-lg max-w-[700px] mx-auto mt-20"
+        className="bg-white p-8 rounded-lg shadow-lg max-w-[700px] mx-auto mt-28"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 "
       >
-        <h2 className="text-xl font-bold mb-4">Select Winner</h2>
+        <h2 className="text-xl font-bold mb-4">Winner details</h2>
         {selectedLottery && (
           <div>
             <p>
               <strong>Lottery Number:</strong> {selectedLottery.number}
             </p>
-            <p>
+            {/* <p>
               <strong>Token:</strong> {selectedLottery.token}
-            </p>
+            </p> */}
             <p>
               <strong>Start Time:</strong> {selectedLottery.startTime}
             </p>
@@ -143,8 +143,9 @@ export default function AdminDashboard() {
             </p>
             <p>
               <strong>Addresses:</strong>
+              {selectedLottery.Winner}
             </p>
-            <ul>
+            {/* <ul>
               {selectedLottery.addresses.map((address, index) => (
                 <li key={index}>
                   <input
@@ -156,20 +157,20 @@ export default function AdminDashboard() {
                   {address}
                 </li>
               ))}
-            </ul>
+            </ul> */}
             <div className="mt-6 flex justify-end space-x-4">
               <button
                 className="bg-gray-300 text-black px-4 py-2 rounded"
                 onClick={closeModal}
               >
-                Cancel
+                Back
               </button>
-              <button
+              {/* <button
                 className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
                 onClick={handleSubmitWinner}
               >
                 Confirm
-              </button>
+              </button> */}
             </div>
           </div>
         )}

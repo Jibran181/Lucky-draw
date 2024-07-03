@@ -10,6 +10,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { Web3Context } from "./web3context";
 import abi from "./abi";
+import axios from "axios";
+
 export default function Main() {
   const {
     isConnectedd,
@@ -27,69 +29,46 @@ export default function Main() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedLottery, setSelectedLottery] = useState({});
   const [BalanceOf, setBalanceOf] = useState();
+  const [lotteries, setLotteries] = useState([]);
+
+  const address = "0xAA67bcf897081D4716260890f8Ca9EfFf3eC1584";
   useEffect(() => {
+    fetchData();
     AOS.init({ duration: 3000 });
   }, []);
-  const data = [
-    {
-      number: "12345",
-      token: "ETH",
-      winner: "",
-      startTime: "01/01/2024 12:00 PM",
-      endTime: "01/15/2024 12:00 PM",
-      status: "Active",
-      address: "0x123...abcd",
-    },
-    {
-      number: "67890",
-      token: "ETH",
-      winner: "Jane Smith",
-      startTime: "02/01/2024 01:00 PM",
-      endTime: "02/15/2024 01:00 PM",
-      status: "Non-Active",
-      address: "0x456...efgh",
-    },
-    {
-      number: "11223",
-      token: "ETH",
-      winner: "",
-      startTime: "03/01/2024 02:00 PM",
-      endTime: "03/15/2024 02:00 PM",
-      status: "Active",
-      address: "0x789...ijkl",
-    },
-    {
-      number: "44556",
-      token: "ETH",
-      winner: "Bob Brown",
-      startTime: "04/01/2024 03:00 PM",
-      endTime: "04/15/2024 03:00 PM",
-      status: "Non-Active",
-      address: "0x101...mnop",
-    },
-    {
-      number: "77889",
-      token: "ETH",
-      winner: "",
-      startTime: "05/01/2024 04:00 PM",
-      endTime: "05/15/2024 04:00 PM",
-      status: "Active",
-      address: "0x121...qrst",
-    },
-  ];
+  const fetchData = async () => {
+    axios
+      .get("https://lucky-backend-rosy.vercel.app/lottery/")
+      // .get(
+      //   `https://token-generator-backend-eta.vercel.app/airdrop/GetAirdrop/123`
+      // )
+
+      .then((response) => {
+        // Set the retrieved data to the state
+        setLotteries(response?.data?.Lottery);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error, e.g., show an error message
+      });
+    console.log(lotteries, "lott");
+  };
 
   const openModal = async (lottery) => {
     try {
       const ct = new ethers.Contract(address, abi, web3);
       const BalanceOfA = await ct.balanceOf(connectedAddress);
+      console.log("cccccccccc", BalanceOfA.toString());
       setBalanceOf(BalanceOfA.toString());
       // setBalanceOf(await ct.balanceOf(bAddress));
-      if (BalanceOf > 0) {
+      if (BalanceOfA > 0) {
         setSelectedLottery(lottery);
         setModalIsOpen(true);
+      } else {
+        alert("Insufficient UFT Tokens :  ", BalanceOfA);
       }
     } catch (error) {
-      alert(error.code);
+      alert(error);
     }
   };
 
@@ -132,26 +111,28 @@ export default function Main() {
             <thead>
               <tr>
                 <th className="px-4 py-2 border-b">Lottery Number</th>
-                <th className="px-4 py-2 border-b">Token</th>
+                {/* <th className="px-4 py-2 border-b">Token</th> */}
                 <th className="px-4 py-2 border-b">Winner</th>
                 <th className="px-4 py-2 border-b">Start Time</th>
                 <th className="px-4 py-2 border-b">End Time</th>
-                <th className="px-4 py-2 border-b">Status</th>
+                {/* <th className="px-4 py-2 border-b">Status</th> */}
                 <th className="px-4 py-2 border-b">Claim/Buy Ticket</th>
-                <th className="px-4 py-2 border-b">Winner's Address</th>
+                {/* <th className="px-4 py-2 border-b">Winner's Address</th> */}
               </tr>
             </thead>
             <tbody>
-              {data.map((lottery, index) => (
+              {lotteries?.map((lottery, index) => (
                 <tr key={index}>
-                  <td className="px-4 py-2 border-t">{lottery.number}</td>
-                  <td className="px-4 py-2 border-t">{lottery.token}</td>
                   <td className="px-4 py-2 border-t">
-                    {lottery.status === "Non-Active" ? lottery.winner : "N/A"}
+                    {lottery.LotteryNumber}
                   </td>
-                  <td className="px-4 py-2 border-t">{lottery.startTime}</td>
-                  <td className="px-4 py-2 border-t">{lottery.endTime}</td>
+                  {/* <td className="px-4 py-2 border-t">{lottery.token}</td> */}
                   <td className="px-4 py-2 border-t">
+                    {lottery.status === "Non-Active" ? lottery.Winner : "N/A"}
+                  </td>
+                  <td className="px-4 py-2 border-t">{lottery.start}</td>
+                  <td className="px-4 py-2 border-t">{lottery.end}</td>
+                  {/* <td className="px-4 py-2 border-t">
                     <span
                       className={`text-${
                         lottery.status === "Active" ? "green" : "red"
@@ -159,7 +140,7 @@ export default function Main() {
                     >
                       &#x2022; {lottery.status}
                     </span>
-                  </td>
+                  </td> */}
                   <td className="px-4 py-2 border-t">
                     <button
                       className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
@@ -168,7 +149,7 @@ export default function Main() {
                       Claim/Buy Ticket
                     </button>
                   </td>
-                  <td className="px-4 py-2 border-t">{lottery.address}</td>
+                  {/* <td className="px-4 py-2 border-t">{lottery.address}</td> */}
                 </tr>
               ))}
             </tbody>
