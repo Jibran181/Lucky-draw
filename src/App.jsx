@@ -20,18 +20,20 @@ function App() {
       // className="bg-cover bg-center min-h-screen h-screen bg-[url('./assets/full-bg.jpg')] font-bod"
       >
         <Web3Provider>
-          {" "}
-          <Navbar />
           <Router>
+            <Navbar />
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/admin/login" element={<AdminLogin />} />
-              {/* <Route path="/admin/dashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} /> */}
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route
-                path="/admin/createLotteryPage"
-                element={<CreateLotteryPage />}
-              />
+              {/* <Route
+                path="/admin/dashboard"
+                element={
+                  <PrivateRoute>
+                    <AdminDashboard />
+                  </PrivateRoute>
+                }
+              /> */}
+              {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
             </Routes>
           </Router>
         </Web3Provider>{" "}

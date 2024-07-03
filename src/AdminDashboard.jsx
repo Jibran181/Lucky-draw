@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
+import CreateLotteryPage from "./CreateLotteryPage";
+import axios from "axios";
 
 Modal.setAppElement("#root");
 
@@ -15,32 +17,21 @@ export default function AdminDashboard() {
   }, []);
 
   const fetchData = async () => {
-    setLotteries([
-      {
-        number: "12345",
-        token: "ETH",
-        winner: "pending",
-        startTime: "01/01/2024 12:00 PM",
-        endTime: "01/15/2024 12:00 PM",
-        status: "Active",
-        addresses: [
-          "0x123...abcd",
-          "0x456...efgh",
-          "0x789...ijkl",
-          "0x101...mnop",
-          "0x121...qrst",
-        ],
-      },
-      // Add other lottery data here
-    ]);
+    axios
+      .get("https://lucky-backend-rosy.vercel.app/lottery/")
+      // .get(
+      //   `https://token-generator-backend-eta.vercel.app/airdrop/GetAirdrop/123`
+      // )
 
-    return;
-    try {
-      const response = await axios.get("https://your-api-url.com/lotteries");
-      setLotteries(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+      .then((response) => {
+        // Set the retrieved data to the state
+        setLotteries(response?.data?.Lottery);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error, e.g., show an error message
+      });
+    console.log(lotteries, "lott");
   };
 
   const openModal = (lottery) => {
@@ -84,44 +75,37 @@ export default function AdminDashboard() {
       <h2 className="text-2xl font-bold text-white text-center py-8 cursor-pointer w-full  bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
         Admin Dashboard
       </h2>
-      <div className="flex flex-row justify-end my-10">
-        <button
-          onClick={handlecreateLotteryPage}
-          class=" transition-colors inline-flex justify-center items-center p-4  font-medium !text-center !text-xl !border-2 !border-[#efb23a] hover:!bg-[#efb23a] text-white !bg-[#233545] rounded-lg  "
-        >
-          Create Lucky Draw
-        </button>
-      </div>
+      <CreateLotteryPage />
       <div className=" ">
         <table className="w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl mb-28 text-left">
           <thead>
             <tr>
               <th className="px-4 py-2 border-b">Lottery Number</th>
-              <th className="px-4 py-2 border-b">Token</th>
+              {/* <th className="px-4 py-2 border-b">Token</th> */}
               <th className="px-4 py-2 border-b">Winner</th>
               <th className="px-4 py-2 border-b">Start Time</th>
               <th className="px-4 py-2 border-b">End Time</th>
-              <th className="px-4 py-2 border-b">Status</th>
+              {/* <th className="px-4 py-2 border-b">Status</th> */}
               <th className="px-4 py-2 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
-            {lotteries.map((lottery, index) => (
+            {lotteries?.map((lottery, index) => (
               <tr key={index}>
-                <td className="px-4 py-2 border-t">{lottery.number}</td>
-                <td className="px-4 py-2 border-t">{lottery.token}</td>
-                <td className="px-4 py-2 border-t">{lottery.winner}</td>
-                <td className="px-4 py-2 border-t">{lottery.startTime}</td>
-                <td className="px-4 py-2 border-t">{lottery.endTime}</td>
-                <td className="px-4 py-2 border-t">
+                <td className="px-4 py-2 border-t">{lottery?.LotteryNumber}</td>
+                {/* <td className="px-4 py-2 border-t">{lottery?.token}</td> */}
+                <td className="px-4 py-2 border-t">{lottery?.Winner}</td>
+                <td className="px-4 py-2 border-t">{lottery?.start}</td>
+                <td className="px-4 py-2 border-t">{lottery?.end}</td>
+                {/* <td className="px-4 py-2 border-t">
                   <span
                     className={`text-${
-                      lottery.status === "Active" ? "green" : "red"
+                      lottery?.status === "Active" ? "green" : "red"
                     }-500`}
                   >
-                    &#x2022; {lottery.status}
+                    &#x2022; {lottery?.status}
                   </span>
-                </td>
+                </td> */}
                 <td className="px-4 py-2 border-t">
                   <button
                     className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"

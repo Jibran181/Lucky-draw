@@ -1,18 +1,32 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Timer from "./timer";
 import BgImage from "../assets/112-r.png";
 import crypto from "../assets/234.png";
 import Modal from "react-modal";
+import { ethers } from "ethers";
 import coins from "../assets/flying-gold-coins-vector-illustration.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import { Web3Context } from "./web3context";
+import abi from "./abi";
 export default function Main() {
+  const {
+    isConnectedd,
+    web3,
+    connectedAddress,
+    connectToMetaMask,
+    signer,
+    Network,
+    isOpen,
+    dopen,
+    setdopen,
+  } = useContext(Web3Context);
   //  Counter is a state initialized to 0
   const [counter, setCounter] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedLottery, setSelectedLottery] = useState({});
+  const [BalanceOf, setBalanceOf] = useState();
   useEffect(() => {
     AOS.init({ duration: 3000 });
   }, []);
@@ -64,9 +78,19 @@ export default function Main() {
     },
   ];
 
-  const openModal = (lottery) => {
-    setSelectedLottery(lottery);
-    setModalIsOpen(true);
+  const openModal = async (lottery) => {
+    try {
+      const ct = new ethers.Contract(address, abi, web3);
+      const BalanceOfA = await ct.balanceOf(connectedAddress);
+      setBalanceOf(BalanceOfA.toString());
+      // setBalanceOf(await ct.balanceOf(bAddress));
+      if (BalanceOf > 0) {
+        setSelectedLottery(lottery);
+        setModalIsOpen(true);
+      }
+    } catch (error) {
+      alert(error.code);
+    }
   };
 
   const closeModal = () => {

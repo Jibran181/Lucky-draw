@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function CreateLotteryPage() {
   const [formData, setFormData] = useState({
     LotteryNumber: "",
-    Address: [""],
-    Winner: "",
+    prize: "",
     start: "",
     end: "",
   });
@@ -32,44 +30,31 @@ export default function CreateLotteryPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const requestData = {
+    const data = await {
       LotteryNumber: formData.LotteryNumber,
-      Address: formData.Address.filter((address) => address.trim() !== ""), // Remove empty addresses
-      Winner: formData.Winner,
+      Prize: formData.Prize,
+      Address: [],
+      Winner: "",
       start: formData.start,
       end: formData.end,
     };
-    try {
-      const response = await axios.post(
-        "https://localhost:4444/lottery/addLottery",
-        requestData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("There was an error submitting the form!", error);
-    }
-  };
-  const navigate = useNavigate();
+    console.log(data, "data");
+    axios
+      .post("https://lucky-backend-rosy.vercel.app/lottery/addLottery", data)
+      .then((response) => {
+        console.log(response, "response");
+        alert("Created Successfully");
+        // Handle success, e.g., show a success message
+      })
+      .catch((error) => {
+        console.error("Error:", error);
 
-  const handlecreateLotteryPage = () => {
-    navigate("/admin/dashboard");
+        // Handle error, e.g., show an error message
+      });
   };
   return (
     <>
-      <div className="flex flex-row justify-end px-4 mt-28">
-        <button
-          onClick={handlecreateLotteryPage}
-          class=" transition-colors inline-flex justify-center items-center p-4  font-medium !text-center !text-xl !border-2 !border-[#efb23a] hover:!bg-[#efb23a] text-white !bg-[#233545] rounded-lg  "
-        >
-          View All Lotteries
-        </button>
-      </div>
-      <div className="flex  justify-center ">
+      <div className="flex  justify-center my-16">
         <div className="bg-white p-8 rounded-lg border-[#efb23a] border-2 shadow-[#233545] shadow-xl w-full max-w-sm">
           <h2 className="text-2xl font-bold mb-4 text-center">
             Create Lucky Draw
@@ -95,6 +80,23 @@ export default function CreateLotteryPage() {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="Prize"
+              >
+                Prize{" "}
+              </label>
+              <input
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                id="Prize"
+                type="text"
+                name="Prize"
+                value={formData.Prize}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {/* <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="winner"
               >
                 Winner
@@ -108,9 +110,9 @@ export default function CreateLotteryPage() {
                 onChange={handleChange}
                 required
               />
-            </div>
+            </div> */}
             {/* Address fields */}
-            {formData.Address.map((address, index) => (
+            {/* {formData.Address.map((address, index) => (
               <div className="mb-4" key={index}>
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -127,8 +129,8 @@ export default function CreateLotteryPage() {
                   required
                 />
               </div>
-            ))}
-            <div className="mb-4">
+            ))} */}
+            {/* <div className="mb-4">
               <button
                 class="w-full transition-colors inline-flex justify-center items-center px-3 py-2 text-sm font-medium !text-center hover:!bg-[#efb23a] text-white !bg-[#233545] rounded-lg  "
                 type="button"
@@ -136,7 +138,7 @@ export default function CreateLotteryPage() {
               >
                 Add Address
               </button>
-            </div>
+            </div> */}
             {/* Start and End Date-Time fields */}
             <div className="mb-4">
               <label
