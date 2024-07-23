@@ -130,7 +130,7 @@ export default function Main() {
         </div>
       </div>
       <div id="about" className="mt-10  p-14">
-        <h2 className="text-2xl text-center font-bold text-green-600 border-b-2 border-green-600 pb-2">What is the Ethereum Coin Lottery Game?</h2>
+        <h2 className="text-2xl text-center font-bold text-[#233545] border-b-2 border-[#233545] pb-2">What is the Ethereum Coin Lottery Game?</h2>
         <p className="mt-4 text-center">The Ethereum Coin Lottery Game is a decentralized lottery game where users can participate by purchasing tickets using their Metamask wallet. Every 10 minutes, a new game starts, and one lucky ticket is randomly selected as the winner, receiving the entire prize pool accumulated from ticket sales.</p>
       </div>
 
@@ -139,7 +139,7 @@ export default function Main() {
         <div className="col-span-6 p-6">
 
           <div id="how-to-play" className="mt-10">
-            <h2 className="text-2xl font-bold text-green-600 border-b-2 border-green-600 pb-2">How to Play</h2>
+            <h2 className="text-2xl font-bold text-[#233545] border-b-2 border-[#233545] pb-2">How to Play</h2>
             <ol className="list-decimal list-inside mt-4 space-y-4">
               <li>
                 <h3 className="font-bold">Connect Your Wallet:</h3>
@@ -272,7 +272,7 @@ export default function Main() {
         </div></div>
       </div>
       <section id="key-features" className="mt-10 p-8">
-        <h2 className="text-2xl font-bold text-center text-green-600 border-b-2 border-green-600 pb-2">Key Features</h2>
+        <h2 className="text-2xl font-bold text-center text-[#233545] border-b-2 border-[#233545] pb-2">Key Features</h2>
         <div className="flex flex-wrap justify-center mt-4">
           <div className="bg-white shadow-md rounded-lg p-6 m-4">
             <p className="text-gray-700">Instant Payouts: Winners receive their prizes instantly after the draw ends.</p>
@@ -421,7 +421,7 @@ export default function Main() {
         </div>
       </div>
       <section id="faqs" className="mt-10">
-      <h2 className="text-2xl font-bold text-center text-green-600 border-b-2 border-green-600 pb-2">FAQs</h2>
+      <h2 className="text-2xl font-bold text-center text-[#233545] border-b-2 border-[#233545] pb-2">FAQs</h2>
       <div className="mt-4 px-10">
         {faqs.map((faq, index) => (
           <Accordion key={index} title={faq.question} content={faq.answer} />
