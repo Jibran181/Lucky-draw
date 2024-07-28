@@ -12,6 +12,8 @@ import { Web3Context } from "./web3context";
 import abi from "./abi";
 import axios from "axios";
 import Accordion from './Accordion';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 export default function Main() {
   const {
     isConnectedd,
