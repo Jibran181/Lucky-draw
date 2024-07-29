@@ -13,6 +13,9 @@ import AdminLogin from "./AdminLogin";
 import AdminDashboard from "./AdminDashboard";
 import CreateLotteryPage from "./CreateLotteryPage";
 import Footer from "./components/footer";
+import {  ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <>
@@ -39,6 +42,7 @@ function App() {
         </Web3Provider>{" "}
       </div>{" "}
       <Footer />
+      <ToastContainer />
     </>
   );
 }

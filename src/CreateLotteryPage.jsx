@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Env  from "../helper/Helper"
+import { toast } from 'react-toastify';
+
 
 export default function CreateLotteryPage() {
   const [formData, setFormData] = useState({
@@ -40,15 +43,15 @@ export default function CreateLotteryPage() {
     };
     console.log(data, "data");
     axios
-      .post("https://lucky-backend-rosy.vercel.app/lottery/addLottery", data)
+      .post(`${Env.BASE_URL}/lottery/addLottery`, data)
       .then((response) => {
         console.log(response, "response");
-        alert("Created Successfully");
+        toast.success("Lottery Created Successfully");
         // Handle success, e.g., show a success message
       })
       .catch((error) => {
         console.error("Error:", error);
-
+        toast.error("plese try again ")
         // Handle error, e.g., show an error message
       });
   };

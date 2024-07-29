@@ -40,7 +40,7 @@ export default function Timer() {
     <div className="flex gap-8 flex-wrap">
       <div className="flex flex-col gap-9 justify-center items-center">
         <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 1234 will ends in ..{" "}
+          Lucky Draw No# 1234
         </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer
@@ -56,7 +56,7 @@ export default function Timer() {
       </div>
       <div className="flex flex-col gap-9 justify-center items-center">
         <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 2424 will ends in ..{" "}
+          Lucky Draw No# 2424
         </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer
@@ -72,7 +72,7 @@ export default function Timer() {
       </div>{" "}
       <div className="flex flex-col gap-9 justify-center items-center">
         <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 2424 will ends in ..{" "}
+          Lucky Draw No# 2424
         </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer
@@ -88,7 +88,7 @@ export default function Timer() {
       </div>{" "}
       <div className="flex flex-col gap-9 justify-center items-center">
         <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 2424 will ends in ..{" "}
+          Lucky Draw No# 2424
         </h1>
         <div className="timer-wrapper">
           <CountdownCircleTimer

@@ -13,7 +13,6 @@ import abi from "./abi";
 import axios from "axios";
 import Accordion from './Accordion';
 import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 export default function Main() {
   const {
     isConnectedd,
@@ -34,24 +33,29 @@ export default function Main() {
   const [lotteries, setLotteries] = useState([]);
   const faqs = [
     {
-      question: 'How do I know the game is fair?',
-      answer: 'The game uses smart contracts to handle ticket purchases, draws, and payouts, ensuring that everything is automated and transparent.',
+      question: "How do I know the game is fair?",
+      answer:
+        "The game uses smart contracts to handle ticket purchases, draws, and payouts, ensuring that everything is automated and transparent.",
     },
     {
-      question: 'Can I buy multiple tickets for one game?',
-      answer: 'Yes, you can purchase multiple tickets to increase your chances of winning.',
+      question: "Can I buy multiple tickets for one game?",
+      answer:
+        "Yes, you can purchase multiple tickets to increase your chances of winning.",
     },
     {
-      question: 'What happens if there are technical issues?',
-      answer: 'In the unlikely event of technical issues, the game will pause, and no new tickets will be sold until the issue is resolved. Any ongoing games will continue once the system is back online.',
+      question: "What happens if there are technical issues?",
+      answer:
+        "In the unlikely event of technical issues, the game will pause, and no new tickets will be sold until the issue is resolved. Any ongoing games will continue once the system is back online.",
     },
     {
-      question: 'Do I need ETH in my Metamask wallet to play?',
-      answer: 'Yes, you need to have ETH in your Metamask wallet to purchase tickets and pay for transaction fees.',
+      question: "Do I need ETH in my Metamask wallet to play?",
+      answer:
+        "Yes, you need to have ETH in your Metamask wallet to purchase tickets and pay for transaction fees.",
     },
     {
-      question: 'How are winners selected?',
-      answer: 'Winners are selected randomly using a secure algorithm implemented in the smart contract.',
+      question: "How are winners selected?",
+      answer:
+        "Winners are selected randomly using a secure algorithm implemented in the smart contract.",
     },
   ];
 
@@ -89,10 +93,12 @@ export default function Main() {
         setSelectedLottery(lottery);
         setModalIsOpen(true);
       } else {
-        alert("Insufficient UFT Tokens :  ", BalanceOfA);
+        // alert("Insufficient UFT Tokens :  ", BalanceOfA);
+        toast.warning("Insufficient UFT Tokens :  ", BalanceOfA)
       }
     } catch (error) {
-      alert(error);
+      // alert(error);
+      toast.error("hello")
     }
   };
 
@@ -114,92 +120,203 @@ export default function Main() {
 
   return (
     <>
-
-
       <div className="bg-1">
         <div className="flex justify-around items-center content-center ">
           <div data-aos="fade-right" class=" centered-div w-1/2 ">
-
-
             <div className="fontasf">
               Welcome to the Ethereum Coin Lottery Game!
             </div>
-            <p className="text-white"> Are you ready to test your luck and win big? Our Ethereum Coin Lottery game is an exciting way to potentially earn significant ETH prizes by participating in our fun and straightforward lottery system. Here’s everything you need to know to get started:</p>
+            <p className="text-white">
+              {" "}
+              Are you ready to test your luck and win big? Our Ethereum Coin
+              Lottery game is an exciting way to potentially earn significant
+              ETH prizes by participating in our fun and straightforward lottery
+              system. Here’s everything you need to know to get started:
+            </p>
           </div>
-          <div>
-          </div>
+          <div></div>
           <img data-aos="fade-left" className="w-1/2" src={coins} alt="" />
         </div>
       </div>
       <div id="about" className="mt-10  p-14">
-        <h2 className="text-2xl text-center font-bold text-[#233545] border-b-2 border-[#233545] pb-2">What is the Ethereum Coin Lottery Game?</h2>
-        <p className="mt-4 text-center">The Ethereum Coin Lottery Game is a decentralized lottery game where users can participate by purchasing tickets using their Metamask wallet. Every 10 minutes, a new game starts, and one lucky ticket is randomly selected as the winner, receiving the entire prize pool accumulated from ticket sales.</p>
+        <h2
+          data-aos="fade-up"
+          className="text-2xl !text-center font-bold !text-[#233545] pb-2 fontasf"
+        >
+          What is the Ethereum Coin Lottery Game?
+        </h2>
+        <p className="mt-4 text-center text-[20px]">
+          The Ethereum Coin Lottery Game is a decentralized lottery game where
+          users can participate by purchasing tickets using their Metamask
+          wallet. Every 10 minutes, a new game starts, and one lucky ticket is
+          randomly selected as the winner, receiving the entire prize pool
+          accumulated from ticket sales.
+        </p>
       </div>
-
-
-      <div className="grid grid-cols-12">
-        <div className="col-span-6 p-6">
-
-          <div id="how-to-play" className="mt-10">
-            <h2 className="text-2xl font-bold text-[#233545] border-b-2 border-[#233545] pb-2">How to Play</h2>
-            <ol className="list-decimal list-inside mt-4 space-y-4">
-              <li>
-                <h3 className="font-bold">Connect Your Wallet:</h3>
-                <p>Ensure you have a Metamask wallet installed and set up. Click on the "Connect Wallet" button on the website to link your Metamask wallet to the game.</p>
-              </li>
-              <li>
-                <h3 className="font-bold">Buy a Ticket:</h3>
-                <p>Once your wallet is connected, click the "Buy Ticket" button. Confirm the transaction in your Metamask wallet. The ticket price will be deducted from your ETH balance. After the transaction is confirmed, you will receive a unique ticket number.</p>
-              </li>
-              <li>
-                <h3 className="font-bold">Wait for the Draw:</h3>
-                <p>Games run every 10 minutes. You can see the countdown timer for the next draw on the website. During this period, more players can join, and the prize pool will grow with each ticket purchased.</p>
-              </li>
-              <li>
-                <h3 className="font-bold">Check the Results:</h3>
-                <p>When the timer hits zero, the draw starts, and a winning ticket is randomly selected. If your ticket number matches the winning ticket, you win the entire prize pool! The prize money will be automatically transferred to your Metamask wallet.</p>
-              </li>
-              <li>
-                <h3 className="font-bold">Join the Next Game:</h3>
-                <p>Whether you win or not, you can join the next game by purchasing another ticket. Remember, new games start every 10 minutes, giving you plenty of chances to win!</p>
+      <div id="how-to-play" className="mt-10 bg-[#233545] px-">
+        <div class=" w-full px-10  p-5  flex items-center flex-col ">
+          <h2
+            data-aos="fade-up"
+            className="text-2xl !text-center font-bold !text-white pb-2 fontasf mt-20"
+          >
+            How to Play
+          </h2>
+          <div class="flex items-center w-full my-2 mt-16">
+            <div
+              data-aos="fade-right"
+              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
+            >
+              Connect Your Wallet
+            </div>
+            <ol class="relative border-s border-gray-200 ">
+              <li class="ms-4 flex items-center">
+                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div
+                  data-aos="fade-left"
+                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
+                >
+                  <h3 class="text-lg font-semibold text-white">
+                    Ensure you have a Metamask wallet installed and set up.
+                    Click on the "Connect Wallet" button on the website to link
+                    your Metamask wallet to the game.
+                  </h3>
+                </div>
               </li>
             </ol>
           </div>
+          <div class="flex items-center w-full my-2 ">
+            <div
+              data-aos="fade-right"
+              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
+            >
+              Buy a Ticket
+            </div>
+            <ol class="relative border-s border-gray-200 ">
+              <li class="ms-4 flex items-center">
+                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div
+                  data-aos="fade-left"
+                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
+                >
+                  <h3 class="text-lg font-semibold text-white">
+                    Once your wallet is connected, click the "Buy Ticket"
+                    button. Confirm the transaction in your Metamask wallet. The
+                    ticket price will be deducted from your ETH balance. After
+                    the transaction is confirmed, you will receive a unique
+                    ticket number.
+                  </h3>
+                </div>
+              </li>
+            </ol>
+          </div>{" "}
+          <div class="flex items-center w-full my-2 ">
+            <div
+              data-aos="fade-right"
+              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
+            >
+              Wait for the Draw{" "}
+            </div>
+            <ol class="relative border-s border-gray-200 ">
+              <li class="ms-4 flex items-center">
+                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div
+                  data-aos="fade-left"
+                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
+                >
+                  <h3 class="text-lg font-semibold text-white">
+                    Games run every 10 minutes. You can see the countdown timer
+                    for the next draw on the website. During this period, more
+                    players can join, and the prize pool will grow with each
+                    ticket purchased.
+                  </h3>
+                </div>
+              </li>
+            </ol>
+          </div>{" "}
+          <div class="flex items-center w-full my-2 ">
+            <div
+              data-aos="fade-right"
+              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
+            >
+              Check the Results{" "}
+            </div>
+            <ol class="relative border-s border-gray-200 ">
+              <li class="ms-4 flex items-center">
+                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div
+                  data-aos="fade-left"
+                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
+                >
+                  <h3 class="text-lg font-semibold text-white">
+                    When the timer hits zero, the draw starts, and a winning
+                    ticket is randomly selected. If your ticket number matches
+                    the winning ticket, you win the entire prize pool! The prize
+                    money will be automatically transferred to your Metamask
+                    wallet.
+                  </h3>
+                </div>
+              </li>
+            </ol>
+          </div>{" "}
+          <div class="flex items-center w-full my-2 mb-16">
+            <div
+              data-aos="fade-right"
+              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
+            >
+              Join the Next Game
+            </div>
+            <ol class="relative border-s border-gray-200 ">
+              <li class="ms-4 flex items-center">
+                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div
+                  data-aos="fade-left"
+                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
+                >
+                  <h3 class="text-lg font-semibold text-white">
+                    Whether you win or not, you can join the next game by
+                    purchasing another ticket. Remember, new games start every
+                    10 minutes, giving you plenty of chances to win!
+                  </h3>
+                </div>
+              </li>
+            </ol>
+          </div>{" "}
         </div>
-        <div className="col-span-6"> <div className="flex flex-col justify-center items-center mt-12">
-          <div
-            data-aos="fade-up"
-            class="centered-div w-1/2 !text-[#233545] !text-center"
-          >
-            Current Stats{" "}
-          </div>
-          <div data-aos="fade-up" className="p-4 md:px-10 md:py-5 col-span-8">
-            <table className="w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 border-b">Lottery Number</th>
-                  {/* <th className="px-4 py-2 border-b">Token</th> */}
-                  <th className="px-4 py-2 border-b">Winner</th>
-                  <th className="px-4 py-2 border-b">Start Time</th>
-                  <th className="px-4 py-2 border-b">End Time</th>
-                  {/* <th className="px-4 py-2 border-b">Status</th> */}
-                  <th className="px-4 py-2 border-b">Claim/Buy Ticket</th>
-                  {/* <th className="px-4 py-2 border-b">Winner's Address</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {lotteries?.map((lottery, index) => (
-                  <tr key={index}>
-                    <td className="px-4 py-2 border-t">
-                      {lottery.LotteryNumber}
-                    </td>
-                    {/* <td className="px-4 py-2 border-t">{lottery.token}</td> */}
-                    <td className="px-4 py-2 border-t">
-                      {lottery.status === "Non-Active" ? lottery.Winner : "N/A"}
-                    </td>
-                    <td className="px-4 py-2 border-t">{lottery.start}</td>
-                    <td className="px-4 py-2 border-t">{lottery.end}</td>
-                    {/* <td className="px-4 py-2 border-t">
+      </div>{" "}
+      <div className="flex flex-col justify-center items-center mt-12">
+        <div
+          data-aos="fade-up"
+          className="text-2xl !text-center font-bold !text-[#233545] pb-2 fontasf mt-20"
+        >
+          Current Stats{" "}
+        </div>
+        <div data-aos="fade-up" className="p-4 md:px-10 md:py-5 col-span-8">
+          <table className="w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 border-b">Lottery Number</th>
+                {/* <th className="px-4 py-2 border-b">Token</th> */}
+                <th className="px-4 py-2 border-b">Winner</th>
+                <th className="px-4 py-2 border-b">Start Time</th>
+                <th className="px-4 py-2 border-b">End Time</th>
+                {/* <th className="px-4 py-2 border-b">Status</th> */}
+                <th className="px-4 py-2 border-b">Claim/Buy Ticket</th>
+                {/* <th className="px-4 py-2 border-b">Winner's Address</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {lotteries?.map((lottery, index) => (
+                <tr key={index}>
+                  <td className="px-4 py-2 border-t">
+                    {lottery.LotteryNumber}
+                  </td>
+                  {/* <td className="px-4 py-2 border-t">{lottery.token}</td> */}
+                  <td className="px-4 py-2 border-t">
+                    {lottery.status === "Non-Active" ? lottery.Winner : "N/A"}
+                  </td>
+                  <td className="px-4 py-2 border-t">{lottery.start}</td>
+                  <td className="px-4 py-2 border-t">{lottery.end}</td>
+                  {/* <td className="px-4 py-2 border-t">
                     <span
                       className={`text-${
                         lottery.status === "Active" ? "green" : "red"
@@ -208,94 +325,118 @@ export default function Main() {
                       &#x2022; {lottery.status}
                     </span>
                   </td> */}
-                    <td className="px-4 py-2 border-t">
-                      <button
-                        className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
-                        onClick={() => openModal(lottery)}
-                      >
-                        Claim/Buy Ticket
-                      </button>
-                    </td>
-                    {/* <td className="px-4 py-2 border-t">{lottery.address}</td> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  <td className="px-4 py-2 border-t">
+                    <button
+                      className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
+                      onClick={() => openModal(lottery)}
+                    >
+                      Claim/Buy Ticket
+                    </button>
+                  </td>
+                  {/* <td className="px-4 py-2 border-t">{lottery.address}</td> */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              contentLabel="Claim/Buy Ticket Confirmation"
-              className="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto mt-20"
-              overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-            >
-              <h2 className="text-xl font-bold mb-4">
-                Claim/Buy Ticket Confirmation
-              </h2>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Claim/Buy Ticket Confirmation"
+            className="bg-white p-8 rounded-lg shadow-lg w-1/6 mx-auto mt-20"
+            overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+          >
+            <h2 className="text-xl font-bold mb-4">
+              Claim/Buy Ticket Confirmation
+            </h2>
+            <p>
+              Are you sure you want to Claim/Buy Ticket this lottery number?
+            </p>
+            <div className="mt-4">
               <p>
-                Are you sure you want to Claim/Buy Ticket this lottery number?
+                <strong>Lottery Number:</strong> {selectedLottery.number}
               </p>
-              <div className="mt-4">
-                <p>
-                  <strong>Lottery Number:</strong> {selectedLottery.number}
-                </p>
-                <p>
-                  <strong>Token:</strong> {selectedLottery.token}
-                </p>
-                <p>
-                  <strong>Winner:</strong>{" "}
-                  {selectedLottery.status === "Non-Active"
-                    ? selectedLottery.winner
-                    : "N/A"}
-                </p>
-                <p>
-                  <strong>Start Time:</strong> {selectedLottery.startTime}
-                </p>
-                <p>
-                  <strong>End Time:</strong> {selectedLottery.endTime}
-                </p>
-                <p>
-                  <strong>Winner's Address:</strong> {selectedLottery.address}
-                </p>
-              </div>
-              <div className="mt-6 flex justify-end space-x-4">
-                <button
-                  className="bg-gray-300 text-black px-4 py-2 rounded"
-                  onClick={closeModal}
-                >
-                  Cancel
-                </button>
-                <button className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]">
-                  Confirm
-                </button>
-              </div>
-            </Modal>
-          </div>
-        </div></div>
+              <p>
+                <strong>Token:</strong> {selectedLottery.token}
+              </p>
+              <p>
+                <strong>Winner:</strong>{" "}
+                {selectedLottery.status === "Non-Active"
+                  ? selectedLottery.winner
+                  : "N/A"}
+              </p>
+              <p>
+                <strong>Start Time:</strong> {selectedLottery.startTime}
+              </p>
+              <p>
+                <strong>End Time:</strong> {selectedLottery.endTime}
+              </p>
+              <p>
+                <strong>Winner's Address:</strong> {selectedLottery.address}
+              </p>
+            </div>
+            <div className="mt-6 flex justify-end space-x-4">
+              <button
+                className="bg-gray-300 text-black px-4 py-2 rounded"
+                onClick={closeModal}
+              >
+                Cancel
+              </button>
+              <button className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]">
+                Confirm
+              </button>
+            </div>
+          </Modal>
+        </div>
       </div>
       <section id="key-features" className="mt-10 p-8">
-        <h2 className="text-2xl font-bold text-center text-[#233545] border-b-2 border-[#233545] pb-2">Key Features</h2>
+        <h2 className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf mt-20">
+          Key Features
+        </h2>
         <div className="flex flex-wrap justify-center mt-4">
           <div className="bg-white shadow-md rounded-lg p-6 m-4">
-            <p className="text-gray-700">Instant Payouts: Winners receive their prizes instantly after the draw ends.</p>
+            <p className="text-gray-700">
+              Instant Payouts: Winners receive their prizes instantly after the
+              draw ends.
+            </p>
           </div>
           <div className="bg-white shadow-md rounded-lg p-6 m-4">
-            <p className="text-gray-700">Decentralized and Transparent: All transactions and draws are recorded on the Ethereum blockchain, ensuring transparency and fairness.</p>
+            <p className="text-gray-700">
+              Decentralized and Transparent: All transactions and draws are
+              recorded on the Ethereum blockchain, ensuring transparency and
+              fairness.
+            </p>
           </div>
           <div className="bg-white shadow-md rounded-lg p-6 m-4">
-            <p className="text-gray-700">Regular Games: New games start every 10 minutes, providing frequent opportunities to win..</p>
+            <p className="text-gray-700">
+              Regular Games: New games start every 10 minutes, providing
+              frequent opportunities to win..
+            </p>
           </div>
           <div className="bg-white shadow-md rounded-lg p-6 m-4">
-            <p className="text-gray-700">Secure:All interactions are secured via your Metamask wallet, keeping your funds safe..</p>
+            <p className="text-gray-700">
+              Secure:All interactions are secured via your Metamask wallet,
+              keeping your funds safe..
+            </p>
           </div>
         </div>
       </section>
-
-
+      <div className="flex flex-col justify-center items-center mt-12">
+        <div
+          data-aos="fade-up"
+          className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf my-20"
+        >
+          Clock is ticking!{" "}
+        </div>
+        <div data-aos="fade-up">
+          {" "}
+          <Timer />
+        </div>
+      </div>{" "}
       <div className="flex flex-col justify-center items-center mt-12 bg-[#233545]">
         <div
           data-aos="fade-up"
-          class="centered-div w-1/2 !text-[#efb23a] !text-center mt-12 text-[30px]"
+          className="text-2xl !text-[#efb23a]! font-bold !text-white pb-2 fontasf mt-20"
         >
           Blogs{" "}
         </div>
@@ -410,26 +551,16 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center mt-12">
-        <div
-          data-aos="fade-up"
-          class="centered-div w-1/2 !text-[#233545] !text-center"
-        >
-          Clock is ticking!{" "}
-        </div>
-        <div data-aos="fade-up">
-          {" "}
-          <Timer />
-        </div>
-      </div>
       <section id="faqs" className="mt-10">
-      <h2 className="text-2xl font-bold text-center text-[#233545] border-b-2 border-[#233545] pb-2">FAQs</h2>
-      <div className="mt-4 px-10">
-        {faqs.map((faq, index) => (
-          <Accordion key={index} title={faq.question} content={faq.answer} />
-        ))}
-      </div>
-    </section>
+        <h2 className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf mt-20">
+          FAQs
+        </h2>
+        <div className="mt-4 px-10">
+          {faqs.map((faq, index) => (
+            <Accordion key={index} title={faq.question} content={faq.answer} />
+          ))}
+        </div>
+      </section>
       {/* <div className="grid grid-cols-12 p-2 md:p-6 my-4 text-white text-center "> */}
       {/* <div className="p-2 md:p-8 h-25 grid col-span-4 place-items-center">
           <img
@@ -445,7 +576,6 @@ export default function Main() {
                     </p>
                     </div> */}
       {/* </div> */}
-
       <div className="grid p-2 md:p-6 my-4 text-white text-center">
         {/* <div className="px-2 md:p-10  bg-slate-900 border-sky-500 border-2 shadow-black shadow-xl rounded-xl"> 
                 <img src={crypto} ></img>

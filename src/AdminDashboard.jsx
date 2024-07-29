@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import CreateLotteryPage from "./CreateLotteryPage";
 import axios from "axios";
+import Env  from "../helper/Helper"
 
 Modal.setAppElement("#root");
 
@@ -18,7 +19,7 @@ export default function AdminDashboard() {
 
   const fetchData = async () => {
     axios
-      .get("https://lucky-backend-rosy.vercel.app/lottery/")
+      .get(`${Env.BASE_URL}/lottery/`)
       // .get(
       //   `https://token-generator-backend-eta.vercel.app/airdrop/GetAirdrop/123`
       // )
@@ -31,7 +32,8 @@ export default function AdminDashboard() {
         console.error("Error:", error);
         // Handle error, e.g., show an error message
       });
-    console.log(lotteries, "lott");
+    console.log(lotteries, "allLotries");
+
   };
 
   const openModal = (lottery) => {
