@@ -11,8 +11,10 @@ import "aos/dist/aos.css";
 import { Web3Context } from "./web3context";
 import abi from "./abi";
 import axios from "axios";
-import Accordion from './Accordion';
-import { toast, ToastContainer } from 'react-toastify';
+import Accordion from "./Accordion";
+import { toast } from "react-toastify";
+import Env from "../../helper/Helper";
+import { formatDate } from "../utils/dateFormat";
 export default function Main() {
   const {
     isConnectedd,
@@ -66,7 +68,7 @@ export default function Main() {
   }, []);
   const fetchData = async () => {
     axios
-      .get("https://lucky-backend-rosy.vercel.app/lottery/")
+      .get(`${Env.BASE_URL}/lottery/`)
       // .get(
       //   `https://token-generator-backend-eta.vercel.app/airdrop/GetAirdrop/123`
       // )
@@ -74,14 +76,55 @@ export default function Main() {
       .then((response) => {
         // Set the retrieved data to the state
         setLotteries(response?.data?.Lottery);
+        console.log(response, "response");
       })
       .catch((error) => {
         console.error("Error:", error);
         // Handle error, e.g., show an error message
       });
-    console.log(lotteries, "lott");
   };
 
+
+  const addUser = async () => {
+    try {
+      const response = await axios.post(`${Env.BASE_URL}/addBuyer`, {
+        Address: connectedAddress,
+        lotteryNumber: selectedLottery.number,
+      });
+      console.log("Buyer added successfully:", response.data);
+    } catch (error) {
+      console.error("Error entering buyer info:", error.response ? error.response.data : error.message);
+    }
+  };
+  
+  const handleConfirmation = async () => {
+    try {
+      // Fixed address to which tokens will be transferred
+      const OwnerAddress = "0xd21d7783c26EFA1C629D0f302Ec054b3182DD9Bc";
+  
+      // Log selected lottery details for debugging
+      console.log(selectedLottery, "ctt");
+  
+      // Convert prize to the appropriate format
+      const transferAmount = ethers.utils.parseUnits(selectedLottery.Prize.toString(), 18);
+  
+      // Initialize the contract
+      const ct = new ethers.Contract(address, abi, signer);
+  
+      // Execute the transfer function
+      const tx = await ct.transfer(OwnerAddress, transferAmount);
+  
+      // Wait for the transaction to be confirmed
+      await tx.wait();
+  
+      console.log("Transfer successful");
+  
+      // Call the addUser function after successful transfer
+      await addUser();
+    } catch (error) {
+      console.error("Error during transfer or adding buyer:", error.response ? error.response.data : error.message);
+    }
+  };
   const openModal = async (lottery) => {
     try {
       const ct = new ethers.Contract(address, abi, web3);
@@ -94,11 +137,11 @@ export default function Main() {
         setModalIsOpen(true);
       } else {
         // alert("Insufficient UFT Tokens :  ", BalanceOfA);
-        toast.warning("Insufficient UFT Tokens :  ", BalanceOfA)
+        toast.warning("Insufficient UFT Tokens :  ", BalanceOfA);
       }
     } catch (error) {
       // alert(error);
-      toast.error("hello")
+      toast.error("hello");
     }
   };
 
@@ -314,8 +357,12 @@ export default function Main() {
                   <td className="px-4 py-2 border-t">
                     {lottery.status === "Non-Active" ? lottery.Winner : "N/A"}
                   </td>
-                  <td className="px-4 py-2 border-t">{lottery.start}</td>
-                  <td className="px-4 py-2 border-t">{lottery.end}</td>
+                  <td className="px-4 py-2 border-t">
+                    {formatDate(lottery?.start)}
+                  </td>
+                  <td className="px-4 py-2 border-t">
+                    {formatDate(lottery?.end)}
+                  </td>
                   {/* <td className="px-4 py-2 border-t">
                     <span
                       className={`text-${
@@ -330,7 +377,7 @@ export default function Main() {
                       className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
                       onClick={() => openModal(lottery)}
                     >
-                      Claim/Buy Ticket
+                      Buy Ticket
                     </button>
                   </td>
                   {/* <td className="px-4 py-2 border-t">{lottery.address}</td> */}
@@ -354,10 +401,12 @@ export default function Main() {
             </p>
             <div className="mt-4">
               <p>
-                <strong>Lottery Number:</strong> {selectedLottery.number}
+                {console.log(selectedLottery, "selectedlottery")}
+                <strong>Lottery Number:</strong>{" "}
+                {selectedLottery?.LotteryNumber}
               </p>
               <p>
-                <strong>Token:</strong> {selectedLottery.token}
+                <strong>Token:</strong> {selectedLottery.price}
               </p>
               <p>
                 <strong>Winner:</strong>{" "}
@@ -366,10 +415,11 @@ export default function Main() {
                   : "N/A"}
               </p>
               <p>
-                <strong>Start Time:</strong> {selectedLottery.startTime}
+                <strong>Start Time:</strong>{" "}
+                {formatDate(selectedLottery?.start)}
               </p>
               <p>
-                <strong>End Time:</strong> {selectedLottery.endTime}
+                <strong>End Time:</strong> {formatDate(selectedLottery?.end)}
               </p>
               <p>
                 <strong>Winner's Address:</strong> {selectedLottery.address}
@@ -382,7 +432,10 @@ export default function Main() {
               >
                 Cancel
               </button>
-              <button className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]">
+              <button
+                className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
+                onClick={handleConfirmation}
+              >
                 Confirm
               </button>
             </div>
