@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import Modal from "react-modal";
 import ReactDOM from "react-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
     return <div className="timer">Too lale...</div>;
@@ -35,73 +38,98 @@ export default function Timer() {
     const interval = setInterval(() => getTime(), 1000);
     return () => clearInterval(interval);
   }, []);
+  const settings = {
+    arrows: false,
+    infinite: true,
+    dots: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    variableWidth: true,
+    draggable: true,
 
+    // variableHeight: true,
+    responsive: [
+      {
+        breakpoint: 1540,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          // initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  const slider = React.useRef(null);
+  const timers = [
+    {
+      heading: "          Lucky Draw No# 1234",
+      duration: 3440,
+    },
+    {
+      heading: "          Lucky Draw No# 1234",
+      duration: 440,
+    },
+    {
+      heading: "          Lucky Draw No# 1234",
+      duration: 5440,
+    },
+    {
+      heading: "          Lucky Draw No# 1234",
+      duration: 2440,
+    },
+    {
+      heading: "          Lucky Draw No# 1234",
+      duration: 1040,
+    },
+    {
+      heading: "          Lucky Draw No# 1234",
+      duration: 3440,
+    },
+    {
+      heading: "          Lucky Draw No# 1234",
+      duration: 340,
+    },
+  ];
   return (
     <div className="flex gap-8 flex-wrap">
-      <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 1234
-        </h1>
-        <div className="timer-wrapper">
-          <CountdownCircleTimer
-            isPlaying
-            duration={3440}
-            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
-            colorsTime={[10, 6, 3, 0]}
-            onComplete={() => ({ delay: 1 })}
-          >
-            {renderTime}
-          </CountdownCircleTimer>
-        </div>
-      </div>
-      <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 2424
-        </h1>
-        <div className="timer-wrapper">
-          <CountdownCircleTimer
-            isPlaying
-            duration={400}
-            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
-            colorsTime={[10, 6, 3, 0]}
-            onComplete={() => ({ delay: 1 })}
-          >
-            {renderTime}
-          </CountdownCircleTimer>
-        </div>
-      </div>{" "}
-      <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 2424
-        </h1>
-        <div className="timer-wrapper">
-          <CountdownCircleTimer
-            isPlaying
-            duration={40000}
-            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
-            colorsTime={[10, 6, 3, 0]}
-            onComplete={() => ({ delay: 1 })}
-          >
-            {renderTime}
-          </CountdownCircleTimer>
-        </div>
-      </div>{" "}
-      <div className="flex flex-col gap-9 justify-center items-center">
-        <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
-          Lucky Draw No# 2424
-        </h1>
-        <div className="timer-wrapper">
-          <CountdownCircleTimer
-            isPlaying
-            duration={40000}
-            colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
-            colorsTime={[10, 6, 3, 0]}
-            onComplete={() => ({ delay: 1 })}
-          >
-            {renderTime}
-          </CountdownCircleTimer>
-        </div>
-      </div>
+      <Slider ref={slider} {...settings}>
+        {Array.isArray(timers) &&
+          timers.map((timers) => (
+            <div className="flex flex-col gap-9 justify-center content-center items-center !mx-4 w-[320px] h-[280px] ">
+              <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-center text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
+                {timers.heading}{" "}
+              </h1>
+              <div className="timer-wrapper flex justify-center">
+                <CountdownCircleTimer
+                  isPlaying
+                  duration={timers.duration}
+                  colors={["#efb23a", "#233545", "#efb23a", "#233545"]}
+                  colorsTime={[10, 6, 3, 0]}
+                  onComplete={() => ({ delay: 1 })}
+                >
+                  {renderTime}
+                </CountdownCircleTimer>
+              </div>
+            </div>
+          ))}
+      </Slider>
+
       {/* <div className="animate-pulse flex justify-center my-[60px] text-[18px] md:text-4xl">
         <div className="px-[4px] md:px-[24px]  border-2 rounded-l-lg">{days}<br></br>Days</div>
         <div className="px-[4px] md:px-[24px]  border-2 ">{hours}<br></br>Hours</div>

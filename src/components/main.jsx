@@ -84,7 +84,6 @@ export default function Main() {
       });
   };
 
-
   const addUser = async () => {
     try {
       const response = await axios.post(`${Env.BASE_URL}/addBuyer`, {
@@ -93,36 +92,45 @@ export default function Main() {
       });
       console.log("Buyer added successfully:", response.data);
     } catch (error) {
-      console.error("Error entering buyer info:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error entering buyer info:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
-  
+
   const handleConfirmation = async () => {
     try {
       // Fixed address to which tokens will be transferred
       const OwnerAddress = "0xd21d7783c26EFA1C629D0f302Ec054b3182DD9Bc";
-  
+
       // Log selected lottery details for debugging
       console.log(selectedLottery, "ctt");
-  
+
       // Convert prize to the appropriate format
-      const transferAmount = ethers.utils.parseUnits(selectedLottery.Prize.toString(), 18);
-  
+      const transferAmount = ethers.utils.parseUnits(
+        selectedLottery.Prize.toString(),
+        18
+      );
+
       // Initialize the contract
       const ct = new ethers.Contract(address, abi, signer);
-  
+
       // Execute the transfer function
       const tx = await ct.transfer(OwnerAddress, transferAmount);
-  
+
       // Wait for the transaction to be confirmed
       await tx.wait();
-  
+
       console.log("Transfer successful");
-  
+
       // Call the addUser function after successful transfer
       await addUser();
     } catch (error) {
-      console.error("Error during transfer or adding buyer:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error during transfer or adding buyer:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
   const openModal = async (lottery) => {
@@ -188,7 +196,7 @@ export default function Main() {
         >
           What is the Ethereum Coin Lottery Game?
         </h2>
-        <p className="mt-4 text-center text-[20px]">
+        <p data-aos="fade-up" className="mt-4 text-center text-[20px]">
           The Ethereum Coin Lottery Game is a decentralized lottery game where
           users can participate by purchasing tickets using their Metamask
           wallet. Every 10 minutes, a new game starts, and one lucky ticket is
@@ -442,31 +450,34 @@ export default function Main() {
           </Modal>
         </div>
       </div>
-      <section id="key-features" className="mt-10 p-8">
-        <h2 className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf mt-20">
+      <section id="key-features" className="mt-10 p-8 bg-[#233545]">
+        <h2
+          data-aos="fade-up"
+          className="text-2xl !text-white !text-center font-bold  pb-2 fontasf mt-20"
+        >
           Key Features
         </h2>
-        <div className="flex flex-wrap justify-center mt-4">
-          <div className="bg-white shadow-md rounded-lg p-6 m-4">
+        <div data-aos="fade-up" className="flex flex-wrap justify-center mt-4">
+          <div className="bg-white shadow-md shadow-[#efb23a] hover:shadow-xl hover:shadow-[#efb23a] rounded-lg p-6 m-4 border border-[#efb23a] ">
             <p className="text-gray-700">
               Instant Payouts: Winners receive their prizes instantly after the
               draw ends.
             </p>
           </div>
-          <div className="bg-white shadow-md rounded-lg p-6 m-4">
+          <div className="bg-white shadow-md shadow-[#efb23a] hover:shadow-xl hover:shadow-[#efb23a] rounded-lg p-6 m-4 border border-[#efb23a]  ">
             <p className="text-gray-700">
               Decentralized and Transparent: All transactions and draws are
               recorded on the Ethereum blockchain, ensuring transparency and
               fairness.
             </p>
           </div>
-          <div className="bg-white shadow-md rounded-lg p-6 m-4">
+          <div className="bg-white shadow-md shadow-[#efb23a] hover:shadow-xl hover:shadow-[#efb23a] rounded-lg p-6 m-4 border border-[#efb23a]">
             <p className="text-gray-700">
               Regular Games: New games start every 10 minutes, providing
               frequent opportunities to win..
             </p>
           </div>
-          <div className="bg-white shadow-md rounded-lg p-6 m-4">
+          <div className="bg-white shadow-md shadow-[#efb23a] hover:shadow-xl hover:shadow-[#efb23a] rounded-lg p-6 m-4 border border-[#efb23a]">
             <p className="text-gray-700">
               Secure:All interactions are secured via your Metamask wallet,
               keeping your funds safe..
@@ -474,11 +485,11 @@ export default function Main() {
           </div>
         </div>
       </section>
-      <div className="flex flex-col justify-center items-center mt-12">
-        <div
-          data-aos="fade-up"
-          className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf my-20"
-        >
+      <div
+        className=" flex-col justify-center items-center mt-12"
+        data-aos="fade-up"
+      >
+        <div className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf my-20">
           Clock is ticking!{" "}
         </div>
         <div data-aos="fade-up">
@@ -604,7 +615,7 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <section id="faqs" className="mt-10">
+      <section id="faqs" data-aos="fade-up" className="mt-10">
         <h2 className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf mt-20">
           FAQs
         </h2>

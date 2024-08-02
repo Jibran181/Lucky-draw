@@ -19,10 +19,10 @@ export default function Navbar() {
         Eth Lucky Draw{" "}
       </div>
       <div className="flex flex-row gap-3">
-        <button onClick={handleConnect} className="md:hidden">
+        {/* <button onClick={handleConnect} className="md:hidden">
           {" "}
-          <img src={icon} className="h-11" />{" "}
-        </button>
+          <img src={icon} className="h-[200px]" />{" "}
+        </button> */}
 
         <button
           onClick={handleConnect}

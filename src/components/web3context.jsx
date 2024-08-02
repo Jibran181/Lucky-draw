@@ -36,7 +36,6 @@ export const Web3Provider = ({ children }) => {
               metaMaskAccount[0].length
             );
         }
-        //plesese review it
         setConnectedAddress(metaMaskAccount[0]);
         web3.getNetwork().then((result) => {
           const myObject = result; // Store the resolved object in a const variable
@@ -58,7 +57,7 @@ export const Web3Provider = ({ children }) => {
       console.log(isConnectedd);
       console.log("Already connected to MetaMask11");
     }
-    connectToMetaMask();
+    // connectToMetaMask();
   }, [isConnectedd]);
 
   useEffect(() => {
