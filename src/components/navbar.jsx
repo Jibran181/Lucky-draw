@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full items-center px-4 py-4 md:p-4 h-15 bg-[#efb23a] flex justify-between fixed z-20 top-0 start-0">
-      <div className="text-2xl font-bold text-white  cursor-pointer">
+      <div className="text-xl md:text-2xl font-bold text-white  cursor-pointer">
         Eth Lucky Draw{" "}
       </div>
       <div className="flex flex-row gap-3">
@@ -27,7 +27,7 @@ export default function Navbar() {
         <button
           onClick={handleConnect}
           type="button"
-          className="hidden md:block text-white bg-[#233545]  hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg text-sm p-3 text-center text-[15px] font-bold me-2 mb-2 px-7"
+          className="block text-white bg-[#233545]  hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg text-sm p-3 text-center text-[15px] font-bold me-2 mb-2 px-7"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

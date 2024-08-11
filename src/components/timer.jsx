@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import Modal from "react-modal";
-import ReactDOM from "react-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,7 +61,7 @@ export default function Timer() {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          // initialSlide: 2,
+          initialSlide: 2,
         },
       },
       {
@@ -75,7 +73,6 @@ export default function Timer() {
       },
     ],
   };
-  const slider = React.useRef(null);
   const timers = [
     {
       heading: "          Lucky Draw No# 1234",
@@ -107,8 +104,8 @@ export default function Timer() {
     },
   ];
   return (
-    <div className="flex gap-8 flex-wrap">
-      <Slider ref={slider} {...settings}>
+    <div className="21gap-8">
+      <Slider {...settings}>
         {Array.isArray(timers) &&
           timers.map((timers) => (
             <div className="flex flex-col gap-9 justify-center content-center items-center !mx-4 w-[320px] h-[280px] ">

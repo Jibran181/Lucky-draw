@@ -173,11 +173,11 @@ export default function Main() {
     <>
       <div className="bg-1">
         <div className="flex justify-around items-center content-center ">
-          <div data-aos="fade-right" class=" centered-div w-1/2 ">
-            <div className="fontasf">
+          <div data-aos="fade-right" class=" centered-div md:w-1/2 mx-auto ">
+            <div className="fontasf md:!text-left !text-center">
               Welcome to the Ethereum Coin Lottery Game!
             </div>
-            <p className="text-white">
+            <p className="text-white md:text-left text-center">
               {" "}
               Are you ready to test your luck and win big? Our Ethereum Coin
               Lottery game is an exciting way to potentially earn significant
@@ -186,13 +186,18 @@ export default function Main() {
             </p>
           </div>
           <div></div>
-          <img data-aos="fade-left" className="w-1/2" src={coins} alt="" />
+          <img
+            data-aos="fade-left"
+            className="w-1/2 md:block hidden"
+            src={coins}
+            alt=""
+          />
         </div>
       </div>
       <div id="about" className="mt-10  p-14">
         <h2
           data-aos="fade-up"
-          className="text-2xl !text-center font-bold !text-[#233545] pb-2 fontasf"
+          className="text-2xl !text-center font-bold !text-[#233545] pb-2 fontasf leading-[50px] "
         >
           What is the Ethereum Coin Lottery Game?
         </h2>
@@ -204,28 +209,22 @@ export default function Main() {
           accumulated from ticket sales.
         </p>
       </div>
-      <div id="how-to-play" className="mt-10 bg-[#233545] px-">
+      <div id="how-to-play" className="mt-10 bg-[#233545] ">
         <div class=" w-full px-10  p-5  flex items-center flex-col ">
           <h2
             data-aos="fade-up"
-            className="text-2xl !text-center font-bold !text-white pb-2 fontasf mt-20"
+            className="text-2xl !text-center font-bold !text-white pb-2 fontasf mt-20 leading-[50px] "
           >
             How to Play
           </h2>
           <div class="flex items-center w-full my-2 mt-16">
-            <div
-              data-aos="fade-right"
-              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
-            >
+            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Connect Your Wallet
             </div>
             <ol class="relative border-s border-gray-200 ">
               <li class="ms-4 flex items-center">
                 <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div
-                  data-aos="fade-left"
-                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
-                >
+                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
                   <h3 class="text-lg font-semibold text-white">
                     Ensure you have a Metamask wallet installed and set up.
                     Click on the "Connect Wallet" button on the website to link
@@ -236,19 +235,13 @@ export default function Main() {
             </ol>
           </div>
           <div class="flex items-center w-full my-2 ">
-            <div
-              data-aos="fade-right"
-              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
-            >
+            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Buy a Ticket
             </div>
             <ol class="relative border-s border-gray-200 ">
               <li class="ms-4 flex items-center">
                 <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div
-                  data-aos="fade-left"
-                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
-                >
+                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
                   <h3 class="text-lg font-semibold text-white">
                     Once your wallet is connected, click the "Buy Ticket"
                     button. Confirm the transaction in your Metamask wallet. The
@@ -261,19 +254,13 @@ export default function Main() {
             </ol>
           </div>{" "}
           <div class="flex items-center w-full my-2 ">
-            <div
-              data-aos="fade-right"
-              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
-            >
+            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Wait for the Draw{" "}
             </div>
             <ol class="relative border-s border-gray-200 ">
               <li class="ms-4 flex items-center">
                 <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div
-                  data-aos="fade-left"
-                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
-                >
+                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
                   <h3 class="text-lg font-semibold text-white">
                     Games run every 10 minutes. You can see the countdown timer
                     for the next draw on the website. During this period, more
@@ -285,19 +272,13 @@ export default function Main() {
             </ol>
           </div>{" "}
           <div class="flex items-center w-full my-2 ">
-            <div
-              data-aos="fade-right"
-              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
-            >
+            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Check the Results{" "}
             </div>
             <ol class="relative border-s border-gray-200 ">
               <li class="ms-4 flex items-center">
                 <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div
-                  data-aos="fade-left"
-                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
-                >
+                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
                   <h3 class="text-lg font-semibold text-white">
                     When the timer hits zero, the draw starts, and a winning
                     ticket is randomly selected. If your ticket number matches
@@ -310,19 +291,13 @@ export default function Main() {
             </ol>
           </div>{" "}
           <div class="flex items-center w-full my-2 mb-16">
-            <div
-              data-aos="fade-right"
-              class="leading-none text-white mr-6 text-base font-bold w-1/6 "
-            >
+            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Join the Next Game
             </div>
             <ol class="relative border-s border-gray-200 ">
               <li class="ms-4 flex items-center">
                 <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div
-                  data-aos="fade-left"
-                  class="ml-4 border border-white p-3 rounded-lg max-w-5xl"
-                >
+                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
                   <h3 class="text-lg font-semibold text-white">
                     Whether you win or not, you can join the next game by
                     purchasing another ticket. Remember, new games start every
@@ -337,41 +312,41 @@ export default function Main() {
       <div className="flex flex-col justify-center items-center mt-12">
         <div
           data-aos="fade-up"
-          className="text-2xl !text-center font-bold !text-[#233545] pb-2 fontasf mt-20"
+          className="text-2xl !text-center font-bold !text-[#233545] pb-2 fontasf mt-20 leading-[50px]"
         >
           Current Stats{" "}
         </div>
-        <div data-aos="fade-up" className="p-4 md:px-10 md:py-5 col-span-8">
-          <table className="w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
+        <div data-aos="fade-up" className="p-4 md:px-10 md:py-5 ">
+          <table className="w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl overflow-x-scroll rounded-xl">
             <thead>
               <tr>
-                <th className="px-4 py-2 border-b">Lottery Number</th>
-                {/* <th className="px-4 py-2 border-b">Token</th> */}
-                <th className="px-4 py-2 border-b">Winner</th>
-                <th className="px-4 py-2 border-b">Start Time</th>
-                <th className="px-4 py-2 border-b">End Time</th>
-                {/* <th className="px-4 py-2 border-b">Status</th> */}
-                <th className="px-4 py-2 border-b">Claim/Buy Ticket</th>
-                {/* <th className="px-4 py-2 border-b">Winner's Address</th> */}
+                <th className="px-2 py-2 border-b">Lottery Number</th>
+                {/* <th className="px-2 py-2 border-b">Token</th> */}
+                <th className="px-2 py-2 border-b">Winner</th>
+                <th className="px-2 py-2 border-b">Start Time</th>
+                <th className="px-2 py-2 border-b">End Time</th>
+                {/* <th className="px-2 py-2 border-b">Status</th> */}
+                <th className="px-2 py-2 border-b">Claim/Buy Ticket</th>
+                {/* <th className="px-2 py-2 border-b">Winner's Address</th> */}
               </tr>
             </thead>
             <tbody>
               {lotteries?.map((lottery, index) => (
                 <tr key={index}>
-                  <td className="px-4 py-2 border-t">
+                  <td className="px-2 py-2 border-t">
                     {lottery.LotteryNumber}
                   </td>
-                  {/* <td className="px-4 py-2 border-t">{lottery.token}</td> */}
-                  <td className="px-4 py-2 border-t">
+                  {/* <td className="px-2 py-2 border-t">{lottery.token}</td> */}
+                  <td className="px-2 py-2 border-t">
                     {lottery.status === "Non-Active" ? lottery.Winner : "N/A"}
                   </td>
-                  <td className="px-4 py-2 border-t">
+                  <td className="px-2 py-2 border-t">
                     {formatDate(lottery?.start)}
                   </td>
-                  <td className="px-4 py-2 border-t">
+                  <td className="px-2 py-2 border-t">
                     {formatDate(lottery?.end)}
                   </td>
-                  {/* <td className="px-4 py-2 border-t">
+                  {/* <td className="px-2 py-2 border-t">
                     <span
                       className={`text-${
                         lottery.status === "Active" ? "green" : "red"
@@ -380,7 +355,7 @@ export default function Main() {
                       &#x2022; {lottery.status}
                     </span>
                   </td> */}
-                  <td className="px-4 py-2 border-t">
+                  <td className="px-2 py-2 border-t">
                     <button
                       className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
                       onClick={() => openModal(lottery)}
@@ -398,7 +373,7 @@ export default function Main() {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             contentLabel="Claim/Buy Ticket Confirmation"
-            className="bg-white p-8 rounded-lg shadow-lg w-1/6 mx-auto mt-20"
+            className="bg-white p-8 rounded-lg shadow-lg md:w-1/6 mx-auto mt-20"
             overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
           >
             <h2 className="text-xl font-bold mb-4">
@@ -453,7 +428,7 @@ export default function Main() {
       <section id="key-features" className="mt-10 p-8 bg-[#233545]">
         <h2
           data-aos="fade-up"
-          className="text-2xl !text-white !text-center font-bold  pb-2 fontasf mt-20"
+          className="text-2xl !text-white !text-center font-bold  pb-2 fontasf mt-20 leading-[50px]"
         >
           Key Features
         </h2>
@@ -489,7 +464,7 @@ export default function Main() {
         className=" flex-col justify-center items-center mt-12"
         data-aos="fade-up"
       >
-        <div className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf my-20">
+        <div className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf my-20 leading-[50px]">
           Clock is ticking!{" "}
         </div>
         <div data-aos="fade-up">
@@ -497,18 +472,12 @@ export default function Main() {
           <Timer />
         </div>
       </div>{" "}
-      <div className="flex flex-col justify-center items-center mt-12 bg-[#233545]">
-        <div
-          data-aos="fade-up"
-          className="text-2xl !text-[#efb23a]! font-bold !text-white pb-2 fontasf mt-20"
-        >
+      <section className="flex flex-col justify-center items-center mt-12 bg-[#233545]">
+        <div className="text-2xl !text-[#efb23a]! font-bold !text-white pb-2 fontasf mt-20 leading-[50px]">
           Blogs{" "}
         </div>
-        <div className="flex my-12 gap-4">
-          <div
-            data-aos="fade-up"
-            class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow "
-          >
+        <div className="flex my-12 gap-4 md:flex-nowrap flex-wrap justify-center">
+          <div class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
                 Stopwatch{" "}
@@ -541,10 +510,7 @@ export default function Main() {
               </svg>
             </a>
           </div>
-          <div
-            data-aos="fade-up"
-            class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow "
-          >
+          <div class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
                 Buy ticket{" "}
@@ -577,10 +543,7 @@ export default function Main() {
               </svg>
             </a>
           </div>
-          <div
-            data-aos="fade-up"
-            class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow "
-          >
+          <div class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
                 Claim here{" "}
@@ -614,8 +577,8 @@ export default function Main() {
             </a>
           </div>
         </div>
-      </div>
-      <section id="faqs" data-aos="fade-up" className="mt-10">
+      </section>
+      <section id="faqs" className="mt-10">
         <h2 className="text-2xl !text-[#233545] !text-center font-bold  pb-2 fontasf mt-20">
           FAQs
         </h2>
