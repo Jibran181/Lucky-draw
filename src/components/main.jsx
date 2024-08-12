@@ -140,8 +140,8 @@ export default function Main() {
         toast.warning("Insufficient UFT Tokens :  ", BalanceOfA);
       }
     } catch (error) {
-      // alert(error);
-      toast.error("hello");
+      toast.error("something wrong or check wallet",error);
+      console.log(error)
     }
   };
 
@@ -410,16 +410,17 @@ export default function Main() {
               </p>
               <p>
                 <strong>Winner:</strong>{" "}
+              {console.log(selectedLottery,"selectedLottery")}
                 {selectedLottery.status === "Non-Active"
                   ? selectedLottery.winner
                   : "N/A"}
               </p>
               <p>
-                <strong>Start Time:</strong>{" "}
+              <strong>Start Time:</strong>
                 {formatDate(selectedLottery?.start)}
               </p>
               <p>
-                <strong>End Time:</strong> {formatDate(selectedLottery?.end)}
+                {formatDate(selectedLottery?.end)}
               </p>
               <p>
                 <strong>Winner's Address:</strong> {selectedLottery.address}
