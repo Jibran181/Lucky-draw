@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import Env  from "../helper/Helper"
-import { toast } from 'react-toastify';
-
+import Env from "../helper/Helper";
+import { toast } from "react-toastify";
 
 export default function CreateLotteryPage() {
   const [formData, setFormData] = useState({
     LotteryNumber: "",
     prize: "",
+    ticketPrice: "",
     start: "",
     end: "",
   });
@@ -17,26 +17,26 @@ export default function CreateLotteryPage() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleAddressChange = (index, event) => {
-    const newAddresses = formData.Address.map((address, i) => {
-      if (i === index) {
-        return event.target.value;
-      }
-      return address;
-    });
-    setFormData({ ...formData, Address: newAddresses });
-  };
+  // const handleAddressChange = (index, event) => {
+  //   const newAddresses = formData.Address.map((address, i) => {
+  //     if (i === index) {
+  //       return event.target.value;
+  //     }
+  //     return address;
+  //   });
+  //   setFormData({ ...formData, Address: newAddresses });
+  // };
 
-  const addAddressField = () => {
-    setFormData({ ...formData, Address: [...formData.Address, ""] });
-  };
+  // const addAddressField = () => {
+  //   setFormData({ ...formData, Address: [...formData.Address, ""] });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await {
       LotteryNumber: formData.LotteryNumber,
-      Prize: formData.Prize,
-      Address: [],
+      Prize: formData.prize,
+      TicketPrice: formData.ticketPrice,
       Winner: "",
       start: formData.start,
       end: formData.end,
@@ -50,8 +50,8 @@ export default function CreateLotteryPage() {
         // Handle success, e.g., show a success message
       })
       .catch((error) => {
-        console.error("Error:", error);
-        toast.error("plese try again ")
+        console.error("Error:", error.message);
+        toast.error(error.message);
         // Handle error, e.g., show an error message
       });
   };
@@ -89,10 +89,27 @@ export default function CreateLotteryPage() {
               </label>
               <input
                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-                id="Prize"
+                id="prize"
                 type="text"
-                name="Prize"
-                value={formData.Prize}
+                name="prize"
+                value={formData.prize}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="ticketPrice"
+              >
+                Ticket Price{" "}
+              </label>
+              <input
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                id="ticketPrice"
+                type="text"
+                name="ticketPrice"
+                value={formData.ticketPrice}
                 onChange={handleChange}
                 required
               />
@@ -179,7 +196,7 @@ export default function CreateLotteryPage() {
             </div>
             <div className="flex items-center justify-center">
               <button
-                class="w-full transition-colors inline-flex justify-center items-center px-3 py-2 text-sm font-medium !text-center hover:!bg-[#efb23a] text-white !bg-[#233545] rounded-lg  "
+                className="w-full transition-colors inline-flex justify-center items-center px-3 py-2 text-sm font-medium !text-center hover:!bg-[#efb23a] text-white !bg-[#233545] rounded-lg  "
                 type="submit"
               >
                 Submit

@@ -1,8 +1,5 @@
-import React from "react";
 import { useState, useEffect, useContext } from "react";
 import Timer from "./timer";
-import BgImage from "../assets/112-r.png";
-import crypto from "../assets/234.png";
 import Modal from "react-modal";
 import { ethers } from "ethers";
 import coins from "../assets/flying-gold-coins-vector-illustration.png";
@@ -15,24 +12,15 @@ import Accordion from "./Accordion";
 import { toast } from "react-toastify";
 import Env from "../../helper/Helper";
 import { formatDate } from "../utils/dateFormat";
+import Loading from "./loading";
 export default function Main() {
-  const {
-    isConnectedd,
-    web3,
-    connectedAddress,
-    connectToMetaMask,
-    signer,
-    Network,
-    isOpen,
-    dopen,
-    setdopen,
-  } = useContext(Web3Context);
+  const { web3, connectedAddress, signer } = useContext(Web3Context);
   //  Counter is a state initialized to 0
-  const [counter, setCounter] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedLottery, setSelectedLottery] = useState({});
-  const [BalanceOf, setBalanceOf] = useState();
+  const [balanceOf, setBalanceOf] = useState();
   const [lotteries, setLotteries] = useState([]);
+  const [loading, setLoading] = useState(false);
   const faqs = [
     {
       question: "How do I know the game is fair?",
@@ -86,11 +74,15 @@ export default function Main() {
 
   const addUser = async () => {
     try {
-      const response = await axios.post(`${Env.BASE_URL}/addBuyer`, {
-        Address: connectedAddress,
-        lotteryNumber: selectedLottery.number,
-      });
-      console.log("Buyer added successfully:", response.data);
+      const response = await axios.post(
+        `${Env.BASE_URL}/buyer/purchaseTicket`,
+        {
+          Address: connectedAddress,
+          lotteryNumber: selectedLottery.number,
+        }
+      );
+      console.log("Buyer added & Ticket Purchased:", response.data);
+      return response.data;
     } catch (error) {
       console.error(
         "Error entering buyer info:",
@@ -100,6 +92,7 @@ export default function Main() {
   };
 
   const handleConfirmation = async () => {
+    setLoading(true); // Start loading
     try {
       // Fixed address to which tokens will be transferred
       const OwnerAddress = "0xd21d7783c26EFA1C629D0f302Ec054b3182DD9Bc";
@@ -109,7 +102,7 @@ export default function Main() {
 
       // Convert prize to the appropriate format
       const transferAmount = ethers.utils.parseUnits(
-        selectedLottery.Prize.toString(),
+        selectedLottery.TicketPrice.toString(),
         18
       );
 
@@ -121,23 +114,31 @@ export default function Main() {
 
       // Wait for the transaction to be confirmed
       await tx.wait();
-
-      console.log("Transfer successful");
-
       // Call the addUser function after successful transfer
-      await addUser();
+      const result = await addUser();
+
+      if (result) {
+        toast.success("Ticket purchased succesfully ");
+      }
     } catch (error) {
       console.error(
         "Error during transfer or adding buyer:",
         error.response ? error.response.data : error.message
       );
+      toast.error(
+        "Error during transfer or adding buyer:",
+        error.response ? error.response.data : error.message
+      );
+    } finally {
+      setLoading(false); // Stop loading
+      setModalIsOpen(false);
     }
   };
   const openModal = async (lottery) => {
     try {
       const ct = new ethers.Contract(address, abi, web3);
       const BalanceOfA = await ct.balanceOf(connectedAddress);
-      console.log("cccccccccc", BalanceOfA.toString());
+      console.log("cccccccccc", balanceOf);
       setBalanceOf(BalanceOfA.toString());
       // setBalanceOf(await ct.balanceOf(bAddress));
       if (BalanceOfA > 0) {
@@ -157,23 +158,14 @@ export default function Main() {
     setModalIsOpen(false);
   };
 
-  // Function is called everytime increment button is clicked
-  const handleClick1 = () => {
-    // Counter state is incremented
-    setCounter(counter + 1);
-  };
-
-  // Function is called everytime decrement button is clicked
-  const handleClick2 = () => {
-    // Counter state is decremented
-    setCounter(counter - 1);
-  };
-
   return (
     <>
       <div className="bg-1">
         <div className="flex justify-around items-center content-center ">
-          <div data-aos="fade-right" class=" centered-div md:w-1/2 mx-auto ">
+          <div
+            data-aos="fade-right"
+            className=" centered-div md:w-1/2 mx-auto "
+          >
             <div className="fontasf md:!text-left !text-center">
               Welcome to the Ethereum Coin Lottery Game!
             </div>
@@ -210,39 +202,39 @@ export default function Main() {
         </p>
       </div>
       <div id="how-to-play" className="mt-10 bg-[#233545] ">
-        <div class=" w-full px-10  p-5  flex items-center flex-col ">
+        <div className=" w-full px-10  p-5  flex items-center flex-col ">
           <h2
             data-aos="fade-up"
             className="text-2xl !text-center font-bold !text-white pb-2 fontasf mt-20 leading-[50px] "
           >
             How to Play
           </h2>
-          <div class="flex items-center w-full my-2 mt-16">
-            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
+          <div className="flex items-center w-full my-2 mt-16">
+            <div className="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Connect Your Wallet
             </div>
-            <ol class="relative border-s border-gray-200 ">
-              <li class="ms-4 flex items-center">
-                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
-                  <h3 class="text-lg font-semibold text-white">
+            <ol className="relative border-s border-gray-200 ">
+              <li className="ms-4 flex items-center">
+                <div className="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div className="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
+                  <h3 className="text-lg font-semibold text-white">
                     Ensure you have a Metamask wallet installed and set up.
-                    Click on the "Connect Wallet" button on the website to link
-                    your Metamask wallet to the game.
+                    Click on the " Connect Wallet " button on the website to
+                    link your Metamask wallet to the game.
                   </h3>
                 </div>
               </li>
             </ol>
           </div>
-          <div class="flex items-center w-full my-2 ">
-            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
+          <div className="flex items-center w-full my-2 ">
+            <div className="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Buy a Ticket
             </div>
-            <ol class="relative border-s border-gray-200 ">
-              <li class="ms-4 flex items-center">
-                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
-                  <h3 class="text-lg font-semibold text-white">
+            <ol className="relative border-s border-gray-200 ">
+              <li className="ms-4 flex items-center">
+                <div className="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div className="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
+                  <h3 className="text-lg font-semibold text-white">
                     Once your wallet is connected, click the "Buy Ticket"
                     button. Confirm the transaction in your Metamask wallet. The
                     ticket price will be deducted from your ETH balance. After
@@ -253,15 +245,15 @@ export default function Main() {
               </li>
             </ol>
           </div>{" "}
-          <div class="flex items-center w-full my-2 ">
-            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
+          <div className="flex items-center w-full my-2 ">
+            <div className="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Wait for the Draw{" "}
             </div>
-            <ol class="relative border-s border-gray-200 ">
-              <li class="ms-4 flex items-center">
-                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
-                  <h3 class="text-lg font-semibold text-white">
+            <ol className="relative border-s border-gray-200 ">
+              <li className="ms-4 flex items-center">
+                <div className="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div className="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
+                  <h3 className="text-lg font-semibold text-white">
                     Games run every 10 minutes. You can see the countdown timer
                     for the next draw on the website. During this period, more
                     players can join, and the prize pool will grow with each
@@ -271,15 +263,15 @@ export default function Main() {
               </li>
             </ol>
           </div>{" "}
-          <div class="flex items-center w-full my-2 ">
-            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
+          <div className="flex items-center w-full my-2 ">
+            <div className="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Check the Results{" "}
             </div>
-            <ol class="relative border-s border-gray-200 ">
-              <li class="ms-4 flex items-center">
-                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
-                  <h3 class="text-lg font-semibold text-white">
+            <ol className="relative border-s border-gray-200 ">
+              <li className="ms-4 flex items-center">
+                <div className="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div className="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
+                  <h3 className="text-lg font-semibold text-white">
                     When the timer hits zero, the draw starts, and a winning
                     ticket is randomly selected. If your ticket number matches
                     the winning ticket, you win the entire prize pool! The prize
@@ -290,15 +282,15 @@ export default function Main() {
               </li>
             </ol>
           </div>{" "}
-          <div class="flex items-center w-full my-2 mb-16">
-            <div class="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
+          <div className="flex items-center w-full my-2 mb-16">
+            <div className="leading-none text-white mr-6 text-base font-bold md:w-1/6 ">
               Join the Next Game
             </div>
-            <ol class="relative border-s border-gray-200 ">
-              <li class="ms-4 flex items-center">
-                <div class="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
-                <div class="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
-                  <h3 class="text-lg font-semibold text-white">
+            <ol className="relative border-s border-gray-200 ">
+              <li className="ms-4 flex items-center">
+                <div className="absolute w-6 h-6 bg-[#efb23a]  rounded-full mt-1.5 -start-3 border border-white"></div>
+                <div className="ml-4 border border-white p-3 rounded-lg max-w-md md:max-w-5xl">
+                  <h3 className="text-lg font-semibold text-white">
                     Whether you win or not, you can join the next game by
                     purchasing another ticket. Remember, new games start every
                     10 minutes, giving you plenty of chances to win!
@@ -321,13 +313,12 @@ export default function Main() {
             <thead>
               <tr>
                 <th className="px-2 py-2 border-b">Lottery Number</th>
-                {/* <th className="px-2 py-2 border-b">Token</th> */}
+                <th className="px-2 py-2 border-b">Winning Prize</th>
+                <th className="px-2 py-2 border-b">Ticket Prize</th>
                 <th className="px-2 py-2 border-b">Winner</th>
                 <th className="px-2 py-2 border-b">Start Time</th>
                 <th className="px-2 py-2 border-b">End Time</th>
-                {/* <th className="px-2 py-2 border-b">Status</th> */}
-                <th className="px-2 py-2 border-b">Claim/Buy Ticket</th>
-                {/* <th className="px-2 py-2 border-b">Winner's Address</th> */}
+                <th className="px-2 py-2 border-b">Buy Ticket</th>
               </tr>
             </thead>
             <tbody>
@@ -336,9 +327,14 @@ export default function Main() {
                   <td className="px-2 py-2 border-t">
                     {lottery.LotteryNumber}
                   </td>
-                  {/* <td className="px-2 py-2 border-t">{lottery.token}</td> */}
                   <td className="px-2 py-2 border-t">
-                    {lottery.status === "Non-Active" ? lottery.Winner : "N/A"}
+                    {lottery.Prize ? lottery.Prize : "N/A"}
+                  </td>
+                  <td className="px-2 py-2 border-t">
+                    {lottery.TicketPrice ? lottery.TicketPrice : "N/A"}
+                  </td>
+                  <td className="px-2 py-2 border-t text-center">
+                    {lottery.Winner ? lottery.Winner : "N/A"}
                   </td>
                   <td className="px-2 py-2 border-t">
                     {formatDate(lottery?.start)}
@@ -346,15 +342,7 @@ export default function Main() {
                   <td className="px-2 py-2 border-t">
                     {formatDate(lottery?.end)}
                   </td>
-                  {/* <td className="px-2 py-2 border-t">
-                    <span
-                      className={`text-${
-                        lottery.status === "Active" ? "green" : "red"
-                      }-500`}
-                    >
-                      &#x2022; {lottery.status}
-                    </span>
-                  </td> */}
+
                   <td className="px-2 py-2 border-t">
                     <button
                       className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
@@ -363,7 +351,6 @@ export default function Main() {
                       Buy Ticket
                     </button>
                   </td>
-                  {/* <td className="px-4 py-2 border-t">{lottery.address}</td> */}
                 </tr>
               ))}
             </tbody>
@@ -389,38 +376,51 @@ export default function Main() {
                 {selectedLottery?.LotteryNumber}
               </p>
               <p>
-                <strong>Token:</strong> {selectedLottery.price}
+                <strong>Winning Prize:</strong>{" "}
+                {selectedLottery?.Prize ? selectedLottery?.Prize : "N/A"}
               </p>
               <p>
+                <strong>Ticket Prize:</strong>{" "}
+                {selectedLottery?.TicketPrice
+                  ? selectedLottery?.TicketPrice
+                  : "N/A"}
+              </p>
+              {/* <p>
                 <strong>Winner:</strong>{" "}
                 {console.log(selectedLottery, "selectedLottery")}
                 {selectedLottery.status === "Non-Active"
                   ? selectedLottery.winner
                   : "N/A"}
-              </p>
+              </p> */}
               <p>
                 <strong>Start Time:</strong>
                 {formatDate(selectedLottery?.start)}
               </p>
               <p>{formatDate(selectedLottery?.end)}</p>
               <p>
-                <strong>Winner's Address:</strong> {selectedLottery.address}
+                <strong className="truncate">Winner's Address:</strong>{" "}
+                {selectedLottery?.Winner ? selectedLottery?.Winner : "N/A"}
               </p>
             </div>
-            <div className="mt-6 flex justify-end space-x-4">
-              <button
-                className="bg-gray-300 text-black px-4 py-2 rounded"
-                onClick={closeModal}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
-                onClick={handleConfirmation}
-              >
-                Confirm
-              </button>
-            </div>
+            {loading ? (
+              <Loading /> // Assuming you have a Loading component
+            ) : (
+              <div className="mt-6 flex justify-end space-x-4">
+                <button
+                  className="bg-gray-300 text-black px-4 py-2 rounded"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
+                  onClick={handleConfirmation}
+                >
+                  Confirm
+                </button>
+              </div>
+            )}
           </Modal>
         </div>
       </div>
@@ -476,24 +476,24 @@ export default function Main() {
           Blogs{" "}
         </div>
         <div className="flex my-12 gap-4 md:flex-nowrap flex-wrap justify-center">
-          <div class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
+          <div className="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
+              <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
                 Stopwatch{" "}
               </h5>
             </a>
-            <p class="mb-3 font-normal text-[#233545] ">
+            <p className="mb-3 font-normal text-[#233545] ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
               iusto neque dignissimos tempore nesciunt architecto ab at
               temporibus praesentium vel impedit dolorum commodi,
             </p>
             <a
               href="#"
-              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
+              className="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
             >
               Read more
               <svg
-                class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -509,29 +509,30 @@ export default function Main() {
               </svg>
             </a>
           </div>
-          <div class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
+          <div className="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
+              <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
                 Buy ticket{" "}
               </h5>
             </a>
-            <p class="mb-3 font-normal text-[#233545] ">
+            <p className="mb-3 font-normal text-[#233545] ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
               iusto neque dignissimos tempore nesciunt architecto ab at
               temporibus praesentium vel impedit dolorum commodi,
             </p>
             <a
               href="#"
-              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
+              className="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
             >
               Read more
               <svg
-                class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 14 10"
               >
+                {/* prettier-ignore */}
                 <path
                   stroke="currentColor"
                   stroke-linecap="round"
@@ -542,24 +543,24 @@ export default function Main() {
               </svg>
             </a>
           </div>
-          <div class="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
+          <div className="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
+              <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
                 Claim here{" "}
               </h5>
             </a>
-            <p class="mb-3 font-normal text-[#233545] ">
+            <p className="mb-3 font-normal text-[#233545] ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
               iusto neque dignissimos tempore nesciunt architecto ab at
               temporibus praesentium vel impedit dolorum commodi,
             </p>
             <a
               href="#"
-              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
+              className="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
             >
               Read more
               <svg
-                class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
