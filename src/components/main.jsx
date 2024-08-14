@@ -308,54 +308,61 @@ export default function Main() {
         >
           Current Stats{" "}
         </div>
-        <div data-aos="fade-up" className="p-4 md:px-10 md:py-5 ">
-          <table className="w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl overflow-x-scroll rounded-xl">
-            <thead>
-              <tr>
-                <th className="px-2 py-2 border-b">Lottery Number</th>
-                <th className="px-2 py-2 border-b">Winning Prize</th>
-                <th className="px-2 py-2 border-b">Ticket Prize</th>
-                <th className="px-2 py-2 border-b">Winner</th>
-                <th className="px-2 py-2 border-b">Start Time</th>
-                <th className="px-2 py-2 border-b">End Time</th>
-                <th className="px-2 py-2 border-b">Buy Ticket</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lotteries?.map((lottery, index) => (
-                <tr key={index}>
-                  <td className="px-2 py-2 border-t">
-                    {lottery.LotteryNumber}
-                  </td>
-                  <td className="px-2 py-2 border-t">
-                    {lottery.Prize ? lottery.Prize : "N/A"}
-                  </td>
-                  <td className="px-2 py-2 border-t">
-                    {lottery.TicketPrice ? lottery.TicketPrice : "N/A"}
-                  </td>
-                  <td className="px-2 py-2 border-t text-center">
-                    {lottery.Winner ? lottery.Winner : "N/A"}
-                  </td>
-                  <td className="px-2 py-2 border-t">
-                    {formatDate(lottery?.start)}
-                  </td>
-                  <td className="px-2 py-2 border-t">
-                    {formatDate(lottery?.end)}
-                  </td>
-
-                  <td className="px-2 py-2 border-t">
-                    <button
-                      className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
-                      onClick={() => openModal(lottery)}
-                    >
-                      Buy Ticket
-                    </button>
-                  </td>
+        <div data-aos="fade-up" className="p-4 md:px-10 md:py-5 w-[100%] ">
+          <div className="overflow-x-auto  ">
+            <table className="max-w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
+              <thead>
+                <tr>
+                  <th className="px-2 py-2 border-b">Lottery Number</th>
+                  <th className="px-2 py-2 border-b">Winning Prize</th>
+                  <th className="px-2 py-2 border-b">Ticket Prize</th>
+                  <th className="px-2 py-2 border-b">Winner</th>
+                  <th className="px-2 py-2 border-b">Start Time</th>
+                  <th className="px-2 py-2 border-b">End Time</th>
+                  <th className="px-2 py-2 border-b">Buy Ticket</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {lotteries?.map((lottery, index) => (
+                  <tr key={index}>
+                    <td className="px-2 py-2 border-t">
+                      {lottery.LotteryNumber}
+                    </td>
+                    <td className="px-2 py-2 border-t">
+                      {lottery.Prize ? lottery.Prize : "N/A"}
+                    </td>
+                    <td className="px-2 py-2 border-t">
+                      {lottery.TicketPrice ? lottery.TicketPrice : "N/A"}
+                    </td>
+                    <td className="px-2 py-2 border-t ">
+                      {lottery.Winner ? lottery.Winner : "N/A"}
+                    </td>
+                    <td className="px-2 py-2 border-t ">
+                      {formatDate(lottery?.start)}
+                    </td>
+                    <td className="px-2 py-2 border-t">
+                      {formatDate(lottery?.end)}
+                    </td>
 
+                    <td className="px-2 py-2 border-t">
+                      {lottery.Winner ? (
+                        <button className="bg-[green] text-white px-3 py-1 rounded hover:bg-[#233545]">
+                          Completed
+                        </button>
+                      ) : (
+                        <button
+                          className="bg-[#efb23a] text-white px-3 py-1 rounded hover:bg-[#233545]"
+                          onClick={() => openModal(lottery)}
+                        >
+                          Buy Ticket
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}

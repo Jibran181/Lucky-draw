@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import CreateLotteryPage from "./CreateLotteryPage";
 import axios from "axios";
-import Env  from "../helper/Helper"
+import Env from "../helper/Helper";
 
 Modal.setAppElement("#root");
 
@@ -33,7 +33,6 @@ export default function AdminDashboard() {
         // Handle error, e.g., show an error message
       });
     console.log(lotteries, "allLotries");
-
   };
 
   const openModal = (lottery) => {

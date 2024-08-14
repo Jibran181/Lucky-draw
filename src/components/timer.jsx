@@ -3,6 +3,9 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
+import Env from "../../helper/Helper";
+
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
     return <div className="timer">Too lale...</div>;
@@ -21,7 +24,7 @@ export default function Timer() {
   const [hours, setHours] = useState(0);
   const [mins, setMins] = useState(0);
   const [secs, setSecs] = useState(0);
-
+  const [timers, setTimers] = useState();
   const deadline = "june, 1, 2024";
 
   const getTime = () => {
@@ -37,12 +40,12 @@ export default function Timer() {
     return () => clearInterval(interval);
   }, []);
   const settings = {
-    arrows: false,
+    arrows: true,
     infinite: true,
-    dots: false,
+    dots: true,
     slidesToShow: 4,
     slidesToScroll: 1,
-    initialSlide: 0,
+    // initialSlide: 0,
     variableWidth: true,
     draggable: true,
 
@@ -73,36 +76,55 @@ export default function Timer() {
       },
     ],
   };
-  const timers = [
-    {
-      heading: "          Lucky Draw No# 1234",
-      duration: 3440,
-    },
-    {
-      heading: "          Lucky Draw No# 1234",
-      duration: 440,
-    },
-    {
-      heading: "          Lucky Draw No# 1234",
-      duration: 5440,
-    },
-    {
-      heading: "          Lucky Draw No# 1234",
-      duration: 2440,
-    },
-    {
-      heading: "          Lucky Draw No# 1234",
-      duration: 1040,
-    },
-    {
-      heading: "          Lucky Draw No# 1234",
-      duration: 3440,
-    },
-    {
-      heading: "          Lucky Draw No# 1234",
-      duration: 340,
-    },
-  ];
+
+  useEffect(() => {
+    fetchData();
+    console.log("hel");
+  }, []);
+  const fetchData = async () => {
+    axios
+      .get(`${Env.BASE_URL}/lottery/active-lotteries`)
+      .then((response) => {
+        // Set the retrieved data to the state
+        setTimers(response?.data);
+        console.log(response, "responsetimer");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error, e.g., show an error message
+      });
+  };
+
+  // const timers = [
+  //   {
+  //     heading: "          Lucky Draw No# 1234",
+  //     duration: 2,
+  //   },
+  //   {
+  //     heading: "          Lucky Draw No# 1234",
+  //     duration: 440,
+  //   },
+  //   {
+  //     heading: "          Lucky Draw No# 1234",
+  //     duration: 5440,
+  //   },
+  //   {
+  //     heading: "          Lucky Draw No# 1234",
+  //     duration: 2440,
+  //   },
+  //   {
+  //     heading: "          Lucky Draw No# 1234",
+  //     duration: 1040,
+  //   },
+  //   {
+  //     heading: "          Lucky Draw No# 1234",
+  //     duration: 3440,
+  //   },
+  //   {
+  //     heading: "          Lucky Draw No# 1234",
+  //     duration: 340,
+  //   },
+  // ];
   return (
     <div className="21gap-8">
       <Slider {...settings}>

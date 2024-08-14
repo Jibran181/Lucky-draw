@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
 import axios from "axios";
 import CreateLotteryPage from "./CreateLotteryPage";
-import Env  from "../helper/Helper"
+import Env from "../helper/Helper";
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ function AdminLogin() {
     e.preventDefault();
     console.log("Navigating to admin dashboard");
     console.log("Navigation function called");
-    console.log(Env.BASE_URL,"Env.BASE_URL")
+    console.log(Env.BASE_URL, "Env.BASE_URL");
     e.preventDefault();
 
     axios
