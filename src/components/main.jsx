@@ -308,7 +308,10 @@ export default function Main() {
         >
           Current Stats{" "}
         </div>
-        <div data-aos="fade-up" className="p-4 md:px-10 md:py-5 w-[100%] ">
+        <div
+          data-aos="fade-up"
+          className="p-4 md:px-10 md:py-5 w-full flex justify-center "
+        >
           <div className="overflow-x-auto  ">
             <table className="max-w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
               <thead>

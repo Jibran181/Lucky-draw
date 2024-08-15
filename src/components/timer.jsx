@@ -40,13 +40,13 @@ export default function Timer() {
     return () => clearInterval(interval);
   }, []);
   const settings = {
-    arrows: true,
+    arrows: false,
     infinite: true,
     dots: true,
     slidesToShow: 4,
     slidesToScroll: 1,
     // initialSlide: 0,
-    variableWidth: true,
+    // variableWidth: true,
     draggable: true,
 
     // variableHeight: true,
@@ -126,11 +126,12 @@ export default function Timer() {
   //   },
   // ];
   return (
-    <div className="21gap-8">
+    <>
+      {" "}
       <Slider {...settings}>
         {Array.isArray(timers) &&
           timers.map((timers) => (
-            <div className="flex flex-col gap-9 justify-center content-center items-center !mx-4 w-[320px] h-[280px] ">
+            <div className="flex flex-col justify-center content-center items-center !mx-4  ">
               <h1 className="md:text-2xl md:font-bold text-[24px] bg-clip-text text-center text-transparent bg-gradient-to-r to-[#233545] from-[#efb23a] font-bold my-4">
                 {timers.heading}{" "}
               </h1>
@@ -148,13 +149,12 @@ export default function Timer() {
             </div>
           ))}
       </Slider>
-
       {/* <div className="animate-pulse flex justify-center my-[60px] text-[18px] md:text-4xl">
         <div className="px-[4px] md:px-[24px]  border-2 rounded-l-lg">{days}<br></br>Days</div>
         <div className="px-[4px] md:px-[24px]  border-2 ">{hours}<br></br>Hours</div>
         <div className="px-[4px] md:px-[24px]  border-2">{mins}<br></br>Minutes</div>
         <div className="px-[4px] md:px-[24px]  border-2 rounded-r-lg">{secs}<br></br>Seconds</div>
         </div> */}
-    </div>
+    </>
   );
 }
