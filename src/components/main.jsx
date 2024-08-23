@@ -345,7 +345,9 @@ export default function Main() {
                     </td>
 
                     <td className="px-2 py-2 border-t">
-                      {lottery.Winner ? (
+                      {console.log(lottery.end, "lottery.end")}
+                      {lottery.Winner ||
+                      new Date().getTime() > new Date(lottery.end).getTime() ? (
                         <button className="bg-[green] text-white px-3 py-1 rounded hover:bg-[#233545]">
                           Completed
                         </button>
