@@ -20,9 +20,6 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     axios
       .get(`${Env.BASE_URL}/lottery/`)
-      // .get(
-      //   `https://token-generator-backend-eta.vercel.app/airdrop/GetAirdrop/123`
-      // )
 
       .then((response) => {
         // Set the retrieved data to the state
@@ -71,14 +68,35 @@ export default function AdminDashboard() {
   const handlecreateLotteryPage = () => {
     navigate("/admin/createLotteryPage");
   };
+
+  const handleWinner = async () => {
+    try {
+      axios.get(`${Env.BASE_URL}/buyer/winnerSelectionCron`).catch((error) => {
+        console.error("Error:", error);
+        // Handle error, e.g., show an error message
+      });
+      console.log(lotteries, "allLotries");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="admin-dashboard-container mt-28 px-4">
-      <h2 className="text-2xl font-bold text-white text-center py-8 cursor-pointer w-full  bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
+      <div className="flex items-center justify-around text-2xl font-bold text-white text-center py-4 cursor-pointer w-full  bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl">
         Admin Dashboard
-      </h2>
+        <button
+          onClick={handleWinner}
+          type="button"
+          className="mr-2 md:mr-0 block text-white shadow-black shadow-lg bg-[#233545]  hover:bg-[#efb23a] rounded-lg text-sm p-3 text-center text-[15px] font-bold px-7 mb-[10px]"
+        >
+          Transfer Funds To Winner
+        </button>
+      </div>
+
       <CreateLotteryPage />
-      <div className=" ">
-        <table className="w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl mb-28 text-left">
+      <div className=" overflow-x-scroll">
+        <table className="overflow-x-scroll w-full text-white bg-[#233545] bg-opacity-50 border-[#efb23a] border-2 shadow-[#233545] shadow-xl rounded-xl mb-28 text-left">
           <thead>
             <tr>
               <th className="px-4 py-2 border-b">Lottery Number</th>
