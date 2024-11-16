@@ -491,15 +491,26 @@ export default function Main() {
           <div className="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
-                Stopwatch{" "}
+                What is Crypto Gaming and Why Should You Care?{" "}
               </h5>
             </a>
-            <p className="mb-3 font-normal text-[#233545] ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              iusto neque dignissimos tempore nesciunt architecto ab at
-              temporibus praesentium vel impedit dolorum commodi,
+            <p className="mb-3 font-normal text-[#233545] text-justify ">
+              Crypto gaming is the intersection of blockchain technology and the
+              gaming world, revolutionizing how players engage with and profit
+              from their gameplay. Unlike traditional games where in-game assets
+              are locked within the platform, crypto games enable players to
+              own, trade, and sell their digital assets securely through
+              blockchain. Whether it's NFTs representing unique characters or
+              tokens earned as in-game currency, players can have true ownership
+              and even earn real income. This model has led to the emergence of
+              play-to-earn games, where users make money simply by
+              participating. As blockchain technology evolves, crypto gaming is
+              expected to introduce new levels of transparency, security, and
+              community-driven development. If you’re a gamer looking to not
+              only play but invest in your time spent online, crypto gaming
+              could be your next big adventure.
             </p>
-            <a
+            {/* <a
               href="#"
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
             >
@@ -519,20 +530,35 @@ export default function Main() {
                   d="M1 5h12m0 0L9 1m4 4L9 9"
                 />
               </svg>
-            </a>
+            </a> */}
           </div>
           <div className="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
-                Buy ticket{" "}
+                Top 3 Crypto Games to Watch in 2024
               </h5>
             </a>
             <p className="mb-3 font-normal text-[#233545] ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              iusto neque dignissimos tempore nesciunt architecto ab at
-              temporibus praesentium vel impedit dolorum commodi,
+              The world of crypto gaming is growing rapidly, and 2024 is set to
+              be a landmark year with some exciting titles making waves. Here
+              are the top 3 crypto games to watch this year: Axie Infinity: A
+              pioneer in play-to-earn gaming, Axie Infinity allows players to
+              collect, breed, and battle digital creatures called Axies. With
+              its robust economy powered by the AXS and SLP tokens, Axie
+              Infinity has become a go-to for gamers looking to make a profit.
+              Illuvium: This game is an upcoming open-world RPG that blends
+              traditional gaming with blockchain technology. Players can capture
+              and battle creatures called Illuvials, each represented by unique
+              NFTs. The game promises stunning visuals, deep gameplay, and an
+              engaging storyline. The Sandbox: More than just a game, The
+              Sandbox is a virtual world where players can create, own, and
+              monetize gaming experiences. By leveraging NFTs and the SAND
+              token, this platform provides a unique mix of creativity and
+              profit potential. If you’re looking to dive into the most
+              promising games in the crypto space, these titles are a great
+              starting point!
             </p>
-            <a
+            {/* <a
               href="#"
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
             >
@@ -544,7 +570,7 @@ export default function Main() {
                 fill="none"
                 viewBox="0 0 14 10"
               >
-                {/* prettier-ignore */}
+                
                 <path
                   stroke="currentColor"
                   stroke-linecap="round"
@@ -553,20 +579,35 @@ export default function Main() {
                   d="M1 5h12m0 0L9 1m4 4L9 9"
                 />
               </svg>
-            </a>
+            </a> */}
           </div>
           <div className="max-w-sm p-6 bg-white hover:bg-[#efb23a] border border-gray-200 rounded-lg shadow ">
             <a href="#">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#233545] ">
-                Claim here{" "}
+                How to Get Started with Crypto Gaming
               </h5>
             </a>
             <p className="mb-3 font-normal text-[#233545] ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              iusto neque dignissimos tempore nesciunt architecto ab at
-              temporibus praesentium vel impedit dolorum commodi,
+              Jumping into the world of crypto gaming might seem intimidating,
+              but it’s easier than you think. Here’s a quick guide to get you
+              started: Choose a Secure Wallet: To store your cryptocurrency and
+              NFTs, you’ll need a digital wallet. Options like MetaMask or Trust
+              Wallet are popular for their ease of use and compatibility with
+              most games. Buy Cryptocurrency: Most crypto games operate on
+              blockchain platforms like Ethereum, so you’ll need some ETH or the
+              game’s native tokens. You can purchase these on major crypto
+              exchanges like Coinbase or Binance. Pick Your Game: Whether you’re
+              interested in strategic battles, RPGs, or world-building, there’s
+              a game for you. Start by exploring beginner-friendly options like
+              Gods Unchained or Axie Infinity to learn the ropes. Engage and
+              Earn: Dive into gameplay, participate in battles, complete quests,
+              and trade assets on marketplaces. Over time, you’ll build a
+              portfolio of valuable NFTs and earn crypto rewards. Crypto gaming
+              not only adds an exciting dimension to your gameplay but also
+              opens up new opportunities for earning. Start now, and be part of
+              the future of gaming!
             </p>
-            <a
+            {/* <a
               href="#"
               className="inline-flex items-center px-3 py-2 text-sm font-medium text-center hover:bg-white text-white bg-[#233545] rounded-lg hover:text-[#233545] "
             >
@@ -586,7 +627,7 @@ export default function Main() {
                   d="M1 5h12m0 0L9 1m4 4L9 9"
                 />
               </svg>
-            </a>
+            </a> */}
           </div>
         </div>
       </section>
